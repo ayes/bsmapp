@@ -29,7 +29,7 @@ def domain_email(request):
 	user = request.user
 
 	try:
-		domain = MailDomain.objects.using('mail').filter(user_id=user.pk)
+		domain = MailDomain.objects.filter(user_id=user.pk)
 	except:
 		domain = {}
 
@@ -40,7 +40,7 @@ def user_email(request):
 	user = request.user
 
 	try:
-		usermail = MailUser.objects.using('mail').select_related('domain').filter(domain__user_id=user.pk)
+		usermail = MailUser.objects.select_related('domain').filter(domain__user_id=user.pk)
 	except:
 		usermail = {}
 
@@ -51,12 +51,12 @@ def edit_user_email(request, post_id):
 	user = request.user
 
 	try:
-		usermail = MailUser.objects.using('mail').select_related('domain').get(id=post_id, domain__user_id=user.pk)
+		usermail = MailUser.objects.select_related('domain').get(id=post_id, domain__user_id=user.pk)
 	except:
 		raise Http404
 
 	try:
-		domain =  MailDomain.objects.using('mail').filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user_id=user.pk)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
@@ -71,7 +71,7 @@ def update_user_email(request):
 	user = request.user
 
 	try:
-		domain =  MailDomain.objects.using('mail').filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user_id=user.pk)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
@@ -84,8 +84,8 @@ def update_user_email(request):
 		
 		if (len(username) == 0) or (len(domain) == 0) or (len(password) == 0):
 			return edit_user_email(request, u'Anda harus mengisi semua bidang')
-		dom = MailDomain.objects.using('mail').get(pk=domain)
-		usermail = MailUser.objects.using('mail').get(id=idmail)
+		dom = MailDomain.objects.get(pk=domain)
+		usermail = MailUser.objects.get(id=idmail)
 		usermail.username = username
 		usermail.domain = dom
 		usermail.password= password
@@ -100,12 +100,12 @@ def add_user_email(request, error = None, berhasil = None, success = False):
 	user = request.user
 
 	try:
-		domain =  MailDomain.objects.using('mail').filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user_id=user.pk)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
 	try:
-		quota = MailQuota.objects.using('mail').all()
+		quota = MailQuota.objects.all()
 	except MailQuota.DoesNotExist:
 		raise Http404
 
@@ -133,12 +133,12 @@ def create_user_email(request):
 	user = request.user
 
 	try:
-		domain =  MailDomain.objects.using('mail').filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user_id=user.pk)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
 	try:
-		quota = MailQuota.objects.using('mail').all()
+		quota = MailQuota.objects.all()
 	except MailQuota.DoesNotExist:
 		raise Http404
 
@@ -153,7 +153,7 @@ def create_user_email(request):
 			return add_user_email(request, u'Anda harus mengisi semua bidang')
 
 		balance = get_balance(request)
-		price = MailQuota.objects.using('mail').get(pk=quota)
+		price = MailQuota.objects.get(pk=quota)
 
 		if balance.balance < price.price:
 			return add_user_email(request, u'Maaf deposit anda tidak mencukupi')
@@ -161,8 +161,8 @@ def create_user_email(request):
 		balance.balance -= price.price
 		balance.save()
 
-		dom = MailDomain.objects.using('mail').get(pk=domain)
-		qta = MailQuota.objects.using('mail').get(pk=quota)
+		dom = MailDomain.objects.get(pk=domain)
+		qta = MailQuota.objects.get(pk=quota)
 		usermail = MailUser(username=username, domain=dom, password=password, quota=qta, active=active)
 		usermail.save(using='mail')
 		return HttpResponseRedirect('/user-email')
