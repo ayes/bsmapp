@@ -15,7 +15,6 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
-	<link rel="stylesheet" href="/media/userdash/theme/css/font-awesome.css">
 	
 	<link rel="stylesheet" href="/media/userdash/theme/css/bootstrap.css">
 	<link rel="stylesheet" href="/media/userdash/theme/css/bootstrap-responsive.css">
@@ -24,6 +23,7 @@
 	
 	<link rel="stylesheet" href="/media/userdash/theme/css/application.css">
 	<link rel="stylesheet" href="/media/userdash/theme/css/pages/dashboard.css">
+	<link rel="stylesheet" href="/media/userdash/theme/css/font-awesome.css">
 
 	<script src="/media/userdash/theme/js/libs/modernizr-2.5.3.min.js"></script>
 
@@ -50,7 +50,7 @@
 			</ul>
 			
 			<ul class="pull-right">
-				<li>Deposit: $ {{ user_balance.balance }}</li>
+				<li>Saldo: <i class="fa fa-usd"></i> {{ user_balance.balance }}</li>
 				<li><a href="#"><i class="icon-user"></i> Hi! {{ user.username }}, mari kita mulai hari ini!</a></li>
 				<li><a href="/dashboard-cust/logout">Logout</a></li>
 			</ul>
@@ -78,14 +78,14 @@
 			<ul id="main-nav" class="nav pull-right">
 				<li class="nav-icon active">
 					<a href="/dashboard-cust">
-						<i class="icon-home"></i>
+						<i class="fa fa-home"></i>
 						<span>Home</span>        					
 					</a>
 				</li>
 
 				<li class="dropdown">					
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="icon-th"></i>
+						<i class="fa fa-money"></i>
 						<span>Rekening</span> 
 						<b class="caret"></b>
 					</a>	
@@ -97,7 +97,7 @@
 				
 				<li class="dropdown">					
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="icon-th"></i>
+						<i class="fa fa-envelope-o"></i>
 						<span>Email Server</span> 
 						<b class="caret"></b>
 					</a>	
