@@ -10,4 +10,9 @@ urlpatterns = patterns('',
 	url(r'^dashboard-cust/create-user-email/?', 'userdash.views.create_user_email'),
 	url(r'^dashboard-cust/update-user-email/?', 'userdash.views.update_user_email'),
 	url(r'^dashboard-cust/kelola-pembayaran/?', 'userdash.views.kelola_pembayaran'),
+	url(r'^dashboard-cust/deposit-paypal/?', 'userdash.views.deposit_paypal'),
+)
+
+urlpatterns += patterns('',
+    (r'^something/hard/to/guess/', include('paypal.standard.ipn.urls')),
 )

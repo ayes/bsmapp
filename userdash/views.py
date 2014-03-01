@@ -6,6 +6,10 @@ from django.contrib import auth
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from acp.models import *
 from userdash.forms import *
+from bsmapp.settings import PAYPAL_RECEIVER_EMAIL
+from paypal.standard.forms import PayPalPaymentsForm
+from django.core.urlresolvers import reverse
+import random
 
 def get_balance(request):
 	user = request.user
@@ -169,3 +173,48 @@ def create_user_email(request):
 def kelola_pembayaran(request):
 
 	return render_to_response('userdash_kelola_pembayaran.html', {'user_balance':get_balance(request)}, RequestContext(request))
+
+def generate_code():
+	result = ''
+	for i in range(0, 4):
+		result += random.choice('0123456789')
+	
+	return result
+
+from django.views.decorators.csrf import csrf_protect
+
+@login_required()
+@csrf_protect
+def deposit_paypal(request):
+
+    paypal_dict = {
+        "business": PAYPAL_RECEIVER_EMAIL,
+        "amount": "1.00",
+        "item_name": "name of the item",
+        "invoice": generate_code(),
+        "notify_url": "http://127.0.0.1:8000" + reverse('paypal-ipn'),
+        "return_url": "http://127.0.0.1:8000/dashboard-cust/kelola-pembayaran/",
+        "cancel_return": "http://127.0.0.1:8000/your-cancel-location/",
+
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form}
+    return render_to_response("userdash_paypal.html", context)
+
+from paypal.standard.ipn.signals import payment_was_successful
+
+@csrf_protect
+def show_me_the_money(sender, **kwargs):
+	ipn_obj = sender
+
+	if ipn_obj.payment_status == "Completed":
+		balance = get_balance(request)
+		balance.balance += 1
+		balance.save()
+	#ipn_obj = sender
+    # Undertake some action depending upon `ipn_obj`.
+    #if ipn_obj.custom == "Upgrade all users!":
+    #    Users.objects.update(paid=True)
+    #print __file__,1, 'This works'        
+payment_was_successful.connect(show_me_the_money)
