@@ -194,9 +194,9 @@ def deposit_paypal(request):
         "amount": "1.00",
         "item_name": "name of the item",
         "invoice": generate_code(),
-        "notify_url": "http://127.0.0.1:8000" + reverse('paypal-ipn'),
-        "return_url": "http://127.0.0.1:8000/dashboard-cust/kelola-pembayaran/",
-        "cancel_return": "http://127.0.0.1:8000/your-cancel-location/",
+        "notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
+        "return_url": "http://bsmsite.com/dashboard-cust/kelola-pembayaran/",
+        "cancel_return": "http://bsmsite.com/your-cancel-location/",
 
     }
 
