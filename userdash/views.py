@@ -90,10 +90,10 @@ def update_user_email(request):
 		usermail.domain = dom
 		usermail.password= password
 		usermail.active = active
-		usermail.save(using='mail')
-		return HttpResponseRedirect('/user-email')
+		usermail.save()
+		return HttpResponseRedirect('/dashboard-cust/user-email')
 	else:
-		return HttpResponseRedirect('/edit-user-email')
+		return HttpResponseRedirect('/dashboard-cust/edit-user-email')
 
 @login_required()
 def add_user_email(request, error = None, berhasil = None, success = False):
@@ -164,10 +164,10 @@ def create_user_email(request):
 		dom = MailDomain.objects.get(pk=domain)
 		qta = MailQuota.objects.get(pk=quota)
 		usermail = MailUser(username=username, domain=dom, password=password, quota=qta, active=active)
-		usermail.save(using='mail')
-		return HttpResponseRedirect('/user-email')
+		usermail.save()
+		return HttpResponseRedirect('/dashboard-cust/user-email')
 	else:
-		return HttpResponseRedirect('/add-user-email')
+		return HttpResponseRedirect('/dashboard-cust/add-user-email')
 
 from django.core.context_processors import csrf
 
