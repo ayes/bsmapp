@@ -164,3 +164,8 @@ def create_user_email(request):
 		return HttpResponseRedirect('/user-email')
 	else:
 		return HttpResponseRedirect('/add-user-email')
+
+@login_required()
+def kelola_pembayaran(request):
+
+	return render_to_response('userdash_kelola_pembayaran.html', {'user_balance':get_balance(request)}, RequestContext(request))

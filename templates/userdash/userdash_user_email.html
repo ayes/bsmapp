@@ -6,7 +6,7 @@
 <div class="span4"><h2>Daftar User Email Anda </h2>
 </div>
 <div class="span8 text-right">
-<a href="/add-user-email" class="btn btn-large btn-secondary">Buat User Email Baru</a>
+<a href="/dashboard-cust/add-user-email" class="btn btn-large btn-secondary">Buat User Email Baru</a>
 </div>
 </div>
 <hr />
@@ -39,7 +39,7 @@
 						            <td>{{ usr.password }}</td>
 						            <td>{{ usr.quota }}</td>
 						            <td>{{ usr.active }}</td>
-						            <td><a href="/edit-user-email/{{ usr.id }}" <span class="label label-primary">Ganti</span></td>
+						            <td><a href="/dashboard-cust/edit-user-email/{{ usr.id }}" <span class="label label-primary">Ganti</span></td>
 						          </tr>
 						          {% endfor %}
 						        </tbody>

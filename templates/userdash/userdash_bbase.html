@@ -51,8 +51,8 @@
 			
 			<ul class="pull-right">
 				<li>Deposit: $ {{ user_balance.balance }}</li>
-				<li><a href="javascript:;"><i class="icon-user"></i> Hi! {{ user.username }}, mari kita mulai hari ini!</a></li>
-				<li><a href="/logout">Logout</a></li>
+				<li><a href="#"><i class="icon-user"></i> Hi! {{ user.username }}, mari kita mulai hari ini!</a></li>
+				<li><a href="/dashboard-cust/logout">Logout</a></li>
 			</ul>
 			
 		</div> <!-- /#top-nav -->
@@ -77,13 +77,23 @@
 		<div class="nav-collapse">
 			<ul id="main-nav" class="nav pull-right">
 				<li class="nav-icon active">
-					<a href="/dashboard-customer">
+					<a href="/dashboard-cust">
 						<i class="icon-home"></i>
 						<span>Home</span>        					
 					</a>
 				</li>
 
+				<li class="dropdown">					
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-th"></i>
+						<span>Rekening</span> 
+						<b class="caret"></b>
+					</a>	
 				
+					<ul class="dropdown-menu">
+						<li><a href="/dashboard-cust/kelola-pembayaran">Kelola Pembayaran</a></li>
+					</ul>    				
+				</li>
 				
 				<li class="dropdown">					
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -93,8 +103,8 @@
 					</a>	
 				
 					<ul class="dropdown-menu">
-						<li><a href="/domain-email">Nama Domain Email</a></li>
-						<li><a href="/user-email">User Email</a></li>
+						<li><a href="/dashboard-cust/domain-email">Nama Domain Email</a></li>
+						<li><a href="/dashboard-cust/user-email">User Email</a></li>
 					</ul>    				
 				</li>
 				
