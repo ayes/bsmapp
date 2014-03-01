@@ -1,0 +1,13 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="span4">
+<i class="fa fa-money fa-2x"></i> <h1><i class="fa fa-usd"></i> {{ user_balance.balance }} USD</h1>
+<p class="help-block"><strong>Note:</strong> Dana milik Anda.</p>
+</div>
+<div class="span8">
+<a href="/dashboard-cust/deposit-paypal">Deposit Via Paypal</a>
+</div>
+</div>
+{% endblock %}

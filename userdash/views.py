@@ -169,6 +169,8 @@ def create_user_email(request):
 	else:
 		return HttpResponseRedirect('/add-user-email')
 
+from django.core.context_processors import csrf
+
 @login_required()
 def kelola_pembayaran(request):
 
@@ -192,14 +194,14 @@ def deposit_paypal(request):
         "amount": "1.00",
         "item_name": "name of the item",
         "invoice": generate_code(),
-        "notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
-        "return_url": "http://bsmsite.com/dashboard-cust/kelola-pembayaran/",
-        "cancel_return": "http://bsmsite.com/your-cancel-location/",
+        "notify_url": "http://127.0.0.1:8000" + reverse('paypal-ipn'),
+        "return_url": "http://127.0.0.1:8000/dashboard-cust/kelola-pembayaran/",
+        "cancel_return": "http://127.0.0.1:8000/your-cancel-location/",
 
     }
 
     form = PayPalPaymentsForm(initial=paypal_dict)
-    context = {"form": form}
+    context = {'form': form}
     return render_to_response("userdash_paypal.html", context)
 
 from paypal.standard.ipn.signals import payment_was_successful
