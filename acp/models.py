@@ -41,6 +41,7 @@ class MailDomain(Orderable):
 class MailQuota(models.Model):
 	quota = models.IntegerField('Quota, megabytes', help_text = u'User quota in megabytes, 0 means unlimited')
 	title = models.CharField('Quota name', help_text = 'Example: 100 megabytes, for staff', max_length = 255)
+	price = models.DecimalField(max_digits=18, decimal_places=2, verbose_name='Price', default=0.00)
 
 	def __unicode__(self):
 		return self.title

@@ -43,7 +43,7 @@
 									<div class="controls">
 									<select id="quota" name="quota">
 										{% for qta in quota %}
-									<option value="{{ qta.id }}">{{ qta.title }}</option>
+									<option value="{{ qta.id }}">{{ qta.title }} - harga: $ {{ qta.price }}</option>
 									{% endfor %}
 									</select>
 									</div>

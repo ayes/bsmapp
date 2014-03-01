@@ -8,4 +8,5 @@ urlpatterns = patterns('',
 	url(r'^edit-user-email/(?P<post_id>[\d]+)$', 'userdash.views.edit_user_email'),
 	url(r'^add-user-email/?', 'userdash.views.add_user_email'),
 	url(r'^create-user-email/?', 'userdash.views.create_user_email'),
+	url(r'^update-user-email/?', 'userdash.views.update_user_email'),
 )

@@ -63,6 +63,34 @@ def edit_user_email(request, post_id):
 			'domain':domain
 		}, RequestContext(request))
 
+def update_user_email(request):
+	user = request.user
+
+	try:
+		domain =  MailDomain.objects.using('mail').filter(user_id=user.pk)
+	except MailDomain.DoesNotExist:
+		raise Http404
+
+	if request.method == 'POST':
+		idmail = request.POST.get('idmail', '')
+		username = request.POST.get('username', '')
+		domain = request.POST.get('domain', '')
+		password = request.POST.get('password', '')
+		active = request.POST.get('active', False)
+		
+		if (len(username) == 0) or (len(domain) == 0) or (len(password) == 0):
+			return edit_user_email(request, u'Anda harus mengisi semua bidang')
+		dom = MailDomain.objects.using('mail').get(pk=domain)
+		usermail = MailUser.objects.using('mail').get(id=idmail)
+		usermail.username = username
+		usermail.domain = dom
+		usermail.password= password
+		usermail.active = active
+		usermail.save(using='mail')
+		return HttpResponseRedirect('/user-email')
+	else:
+		return HttpResponseRedirect('/edit-user-email')
+
 @login_required()
 def add_user_email(request, error = None, berhasil = None, success = False):
 	user = request.user
@@ -76,9 +104,6 @@ def add_user_email(request, error = None, berhasil = None, success = False):
 		quota = MailQuota.objects.using('mail').all()
 	except MailQuota.DoesNotExist:
 		raise Http404
-
-	#domain = MailDomain.objects.using('mail').filter(user_id=user.pk)
-	#quota = MailQuota.objects.using('mail').all()
 
 	if not success:
 		username = request.POST.get('username', '')
@@ -113,9 +138,6 @@ def create_user_email(request):
 	except MailQuota.DoesNotExist:
 		raise Http404
 
-	#domain = MailDomain.objects.using('mail').filter(user_id=user.pk)
-	#quota = MailQuota.objects.using('mail').all()
-
 	if request.method == 'POST':
 		username = request.POST.get('username', '')
 		domain = request.POST.get('domain', '')
@@ -125,6 +147,16 @@ def create_user_email(request):
 		
 		if (len(username) == 0) or (len(domain) == 0) or (len(password) == 0) or (len(quota) == 0):
 			return add_user_email(request, u'Anda harus mengisi semua bidang')
+
+		balance = get_balance(request)
+		price = MailQuota.objects.using('mail').get(pk=quota)
+
+		if balance.balance < price.price:
+			return add_user_email(request, u'Maaf deposit anda tidak mencukupi')
+
+		balance.balance -= price.price
+		balance.save()
+
 		dom = MailDomain.objects.using('mail').get(pk=domain)
 		qta = MailQuota.objects.using('mail').get(pk=quota)
 		usermail = MailUser(username=username, domain=dom, password=password, quota=qta, active=active)

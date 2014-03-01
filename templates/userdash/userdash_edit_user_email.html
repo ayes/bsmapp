@@ -10,8 +10,9 @@
                                     {% if berhasil %}<div class="alert alert-success">{{ berhasil }}</div>{% endif %}
                               
                                       <!-- Contact form -->
-                                    <form id="contact-form" class="form-horizontal" action="/create-user-email" method="post">
+                                    <form id="contact-form" class="form-horizontal" action="/update-user-email" method="post">
                                    	{% csrf_token %}
+                                   	<input type="hidden" id="idmail" name="idmail" value="{{ usermail.id }}">
                                     <fieldset>
 									<div class="control-group">
 									<label class="control-label" for="name">Username</label>
