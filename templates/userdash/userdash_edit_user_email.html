@@ -1,0 +1,60 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+
+<div class="row">
+			
+			<div class="span12">
+<h5>Ganti User Email</h5>
+                                    {% if error %}<div class="alert alert-warning">{{ error }}</div>{% endif %}
+                                    {% if berhasil %}<div class="alert alert-success">{{ berhasil }}</div>{% endif %}
+                              
+                                      <!-- Contact form -->
+                                    <form id="contact-form" class="form-horizontal" action="/create-user-email" method="post">
+                                   	{% csrf_token %}
+                                    <fieldset>
+									<div class="control-group">
+									<label class="control-label" for="name">Username</label>
+									<div class="controls">
+									<input type="text" class="input-large" id="username" name="username" value="{{ usermail.username }}" required="required">
+									</div>
+									</div>
+
+									<div class="control-group">
+									<label class="control-label" for="domain">Domain</label>
+									<div class="controls">
+									<select id="domain" name="domain">
+										{% for dom in domain %}
+									<option value="{{ dom.id }}">{{ dom.domain }}</option>
+									{% endfor %}
+									</select>
+									</div>
+									</div>
+
+                                    <div class="control-group">
+									<label class="control-label" for="name">Password</label>
+									<div class="controls">
+									<input type="text" class="input-large" id="password" name="password" value="{{ usermail.password }}" required="required">
+									</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Aktif</label>
+											<div class="controls">
+											<label class="checkbox">
+											<input type="checkbox" name="active" value="True">
+											Ya/Tidak
+										</label>
+											<p class="help-block"><strong>Note:</strong> Centang jika ingin mengaktifkan user.</p>
+											</div>
+									</div>
+                                         
+									<div class="form-actions">
+									<button type="submit" class="btn btn-primary btn-large"><i class="icon-star"></i> Ganti</button>
+									</div>
+
+                                          </fieldset>
+                                      </form>
+                    </div>
+                    </div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "bbase.html" %}
+
+{% block slider %}{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+
+          <div class="register">
+              <div class="row">
+                <div class="col-md-5 col-sm-5">
+                  <h2>Daftar Hari Ini</h2>
+                  <p class="big grey">Mari memulai hari ini bersama kami</p>
+                  <p>Mari nikmati petualangan baru bersama kami hari ini, dengan mendaftarkan akun baru, anda dapat menggunakan layanan-layanan kami secara otomatis dan tentu saja itu adalah petualangan yang menakjubkan. </p>
+
+                </div>
+
+                <div class="col-md-7 col-sm-7">
+                  <div class="formy">
+                     <h5>Mendaftar untuk Akun Baru</h5>
+                                  <div class="form">
+                                      <!-- Register form (not working)-->
+                                       <form action="/register" method="POST"  class="form-horizontal">
+                                        {{ form.non_field_errors }}
+                                          <!-- Name -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="id_first_name">Nama Depan</label>
+                                            <div class="col-md-9">
+                                              {{ form.first_name.errors }}
+                                              <input type="text" value="{{ form.first_name.value|default_if_none:"" }}" class="form-control" id="id_first_name" name="first_name" required="required">
+                                            </div>
+                                          </div>   
+                                           <div class="form-group">
+                                            <label class="control-label col-md-3" for="id_last_name">Nama Belakang</label>
+                                            <div class="col-md-9">
+                                              {{ form.last_name.errors }}
+                                              <input type="text" value="{{ form.last_name.value|default_if_none:"" }}" class="form-control" id="id_last_name" name="last_name" required="required">
+                                            </div>
+                                          </div>
+                                          <!-- Email -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="id_email">Email Anda</label>
+                                            <div class="col-md-9">
+                                              {{ form.email.errors }}
+                                              <input type="email" value="{{ form.email.value|default_if_none:"" }}" class="form-control" id="id_email" name="email" required="required">
+                                            </div>
+                                          </div>                                          
+                                          <!-- Username -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="id_username">Username</label>
+                                            <div class="col-md-9">
+                                              {{ form.username.errors }}
+                                              <input type="text" value="{{ form.username.value|default_if_none:"" }}" class="form-control" id="id_username" name="username" required="required">
+                                            </div>
+                                          </div>
+                                          <!-- Password -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="id_password1">Password</label>
+                                            <div class="col-md-9">
+                                              {{ form.password1.errors }}
+                                              <input type="password" class="form-control" id="id_password1" name="password1" required="required">
+                                            </div>
+                                          </div>
+                                           <div class="form-group">
+                                            <label class="control-label col-md-3" for="id_password2">Ulang Password</label>
+                                            <div class="col-md-9">
+                                              {{ form.password2.errors }}
+                                              <input type="password" class="form-control" id="id_password2" name="password2" required="required">
+                                            </div>
+                                          </div>
+                                          <!-- Checkbox -->
+                                          <div class="form-group">
+                                             <div class="col-md-9 col-md-offset-3">
+                                                <label class="checkbox-inline">
+                                                   <input type="checkbox" id="inlineCheckbox1" value="agree"> Anda menyetujui Ketentuan kami dan Kebijakan kami
+                                                </label>
+                                             </div>
+                                          </div> 
+                                          {% csrf_token %}
+                                          <!-- Buttons -->
+                                          <div class="form-group">
+                                             <!-- Buttons -->
+                       <div class="col-md-9 col-md-offset-3"> 
+                        <button type="submit" class="btn">Mendaftar</button>
+                      </div>
+                                          </div>
+                                      </form>
+                                             Sudah mempunyai Akun? <a href="login.html">Login</a>
+                                    </div> 
+                                  </div>
+
+                </div>
+              </div>
+            </div>              
+
+
+{% endblock %}

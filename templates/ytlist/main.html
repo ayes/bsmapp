@@ -1,0 +1,43 @@
+{% extends "bbase.html" %}
+
+{% block content %}
+            
+
+    <div class="col-xs-6 col-sm-9">
+		BSM Components - Youtube List
+        <div class="page-header"><h1>BSM Components - Youtube List <span class="label label-success">Python Django</span></h1></div>
+        todo
+        <br /><br />
+        <div class="alert alert-success"><strong>BSM Components</strong> - Youtube List</div>
+
+
+        
+            
+                <h1 class="page-header">{{ vh.judul }}
+                </h1>
+                <div class="flex-video widescreen">
+                    <iframe src='http://www.youtube.com/embed/{{ vh.youtube }}' class="youtube-player" type="text/html" frameborder='0' allowfullscreen></iframe>
+                </div>
+                <div>&nbsp;</div>
+            <div class="well">{{ vh.keterangan }}</div>
+           
+
+      
+       
+        </div>
+    </div>
+    <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Projects</h3>
+            </div>
+            {% for vl in vl_list %}
+            <div class="col-sm-3 col-xs-6">
+                <a href="/video/{{ vl.id }}">
+                    <img class="img-responsive portfolio-item" src="http://img.youtube.com/vi/{{ vl.youtube }}/0.jpg">
+                </a>
+            </div>
+            {% endfor %}
+           
+        </div>
+{% endblock %}

@@ -1,0 +1,389 @@
+{% extends "bbase.html" %}
+
+{% block nbjs %}
+<script src="http://bsmsite.com/media/thema/js/jquery.flexslider-min.js"></script> <!-- Flex slider -->
+<script type="text/javascript">
+$(".flexslider").flexslider({
+  slideshowSpeed: 10000,
+  initDelay: 5000,
+  animationSpeed: 2000,
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+
+
+    <!-- Hero Unit -->
+
+    <div class="row center">
+      <div class="col-md-12">
+
+        <div class="bor"></div>
+
+        <h2>Selamat Datang di BaseSystem Management</h2>
+        <p>Kami  memberikan  solusi  praktis  perancangan & pengembangan  website. Tujuan kami adalah membantu proses bisnis anda, yang ingin memanfaatkan situs web.</p>
+        <div class="bor"></div>
+        <hr />
+      </div>  
+    </div>
+
+    <!-- Hero Ends -->      
+
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="bor"></div>
+
+        <!-- Image blocks starts -->
+
+        <ul class="hover-block">
+          {% for pf in portfolio %}
+          <li>
+
+            <a href="{{ pf.website }}" target="{{ pf.target_url }}">
+              <!-- Image -->
+              <img src="/media/{{ pf.gambar_kecil }}" alt="" /> 
+              <!-- Content with background color Class -->
+              <div class="hover-content {% cycle 'b-orange' 'b-red' 'b-purple' 'b-lblue' 'b-orange' %}">
+                <h6>{{ pf.judul }}</h6>
+               {{ pf.deskripsi }} 
+              </div>
+            </a>
+
+          </li>
+          {% endfor %}
+
+          
+          
+        </ul>
+
+        <div class="clearfix"></div>
+
+        <!-- Image blocks ends -->
+      </div>
+    </div>
+
+<div class="bor"></div>
+
+<hr />
+
+
+<!-- Discover starts -->
+
+  <div class="discover">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Jelajahi</h3>
+        <div class="big grey">Dapatkan Produk Keren Kami.</div>
+          <div class="dis-nav button">
+            <a href="#" id="one">Faza Shop</a> 
+            <a href="#" id="two">BSM Retail POS</a> 
+            <a href="#" id="three">Mail Server</a> 
+            <a href="#" id="four">Radio Streaming</a> 
+          </div>
+
+          <div class="dis-content">
+            <div class="one">
+                <h3>Faza Shop</h3>
+                <p>Situs penjualan berbasis website yang dikemas secara menarik dan tepat pada sasaran. Untuk memenuhi kebutuhan penjualan dan promosi produk Anda.</p>
+                <a href="/product/faza-shop" class="btn btn-warning"><i class="icon-signin"></i> Selengkapnya</a> <a href="http://fazakomputer.com" target="_blank" class="btn btn-success">Lihat Contoh</a>
+            </div>
+            <div class="two">
+                <h3>BSM Retail POS</h3>
+                <p>Software Retail Point of Sale berbasis website untuk membantu transaksi penjualan barang, pencatatan kas dan stock secara online karena itu BSM Retail POS ini berbasis website.</p>
+                <p>untuk demo silahkan login dengan akun berikut:</p>
+                <p>username: admin<br />
+                    password: admin</p>
+                <a href="/product/bsm-retail-pos" class="btn btn-warning"><i class="icon-shopping-cart"></i> Selengkapnya</a> <a href="http://retail.bsmsite.com" target='_blank' class="btn btn-success">Lihat Demo</a>
+            </div>
+            <div class="three">
+               <h3>Mail Server</h3>
+                <p>Paket email server sangat cocok untuk perusahaan yang ingin memiliki email pribadi dengan domain sendiri..</p>
+                <a href="/service/mail-server" class="btn btn-warning"><i class="icon-shopping-cart"></i> Selengkapnya</a>
+            </div>
+            <div class="four">
+               <h3>Radio Streaming</h3>
+                <p>Radio Online Streaming melalui media internet untuk studio radio. Berkembangnya media internet memberikan alternatif bagi kita untuk mendapatkankan informasi dan hiburan.</p>
+                <a href="/service/radio-streaming" class="btn btn-warning"><i class="icon-shopping-cart"></i> Selengkapnya</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Disconver ends --> 
+
+<hr />
+
+<div class="bor"></div>
+
+<div class="service-three">
+  <div class="row">
+
+     <div class="col-md-3">
+      <!-- Service title with tag -->
+        <h6 class="bold grey">SEPOTONG TAG</h6>
+        <h3>Apa Yang Dapat Kami Lakukan?</h3>
+        <p>Kami bangga dengan apa yang kita lakukan bersama, memanfaatkan web sebagai sebuah media interaktif komunikasi global kegiatan branding, publikasi dan marketing.</p>
+        <a href="/blog">Lihat blog kami <i class="icon-double-angle-right"></i> </a>
+        <hr />
+     </div>
+
+     <div class="col-md-7">
+
+        <!--  Service #1 -->
+        <!-- Service icon -->
+        <div class="service-icon red">
+          <i class="icon-camera"></i>
+        </div>
+
+        <div class="service-content">
+          <!-- Title -->
+          <h5>Kami Mengembangkan Website</h5>
+          <p>Kami memberikan solusi praktis bagi perancangan dan pengembangan website.</p>
+        </div>
+
+        <hr />
+
+        <!-- Service #2 -->
+
+        <div class="service-icon orange">
+          <i class="icon-desktop"></i>
+        </div>
+
+        <div class="service-content">
+          <h5>Design Kami Responsive</h5>
+          <p>Situs Anda akan kami lengkapi dengan program-program untuk memaksimalkan fungsi website.</p>
+        </div>
+
+        <hr />   
+
+        <!-- Service #3 -->
+
+        <div class="service-icon lblue">
+          <i class="icon-cloud"></i>
+        </div>
+
+        <div class="service-content">
+          <h5>Semuanya di Dalam Cloud</h5>
+          <p>Website dan aplikasi Anda berada pada server dengan sistem software sebagai sebuah layanan.</p>
+        </div>
+        
+        <hr />
+
+        <!-- Service #4 -->
+
+        <div class="service-icon purple">
+          <i class="icon-user"></i>
+        </div>
+
+        <div class="service-content">
+          <h5>Dukungan Online</h5>
+          <p>Kami memberikan bantuan secara online yang dapat dihubungi jika anda menginginkan solusi.</p>
+        </div>
+        
+        <br />
+
+
+        <div class="clearfix"></div>
+
+     </div>
+
+     <div class="col-md-2">
+      <h6 class="grey bold">Laboratorium</h6>
+      <ul>
+        <li><a href="/labs/zamanda">Zamanda</a></li>
+        <li><a href="/labs/siak">SIAK</a></li>
+      </ul>
+
+     </div>
+
+  </div>
+</div>
+
+
+<hr />
+
+
+
+<!-- Features starts -->
+
+<div class="features-four">
+
+  <h3>Sekilas Proyek Kami</h3>
+  <p>Layanan kami meliputi pengembangan web dan aplikasi berbasis website.</p>
+
+  <br />
+
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="f-block b-red">
+        <a href="#"><i class="icon-briefcase"></i></a>
+        <a href="#"><h4>Strategi</h4></a>
+        <p>Setiap proyek memerlukan strategi berbeda untuk membangun pemasaran yang solid</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="f-block b-purple">
+        <a href="#"><i class="icon-cogs"></i></a>
+        <a href="#"><h4>Rancangan</h4></a>
+        <p>Kami memberikan solusi praktis bagi perancangan dan pengembangan website.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="f-block b-lblue">
+        <a href="#"><i class="icon-camera"></i></a>
+        <a href="#"><h4>Pengembangan</h4></a>
+        <p>Situs Anda akan kami lengkapi dengan aplikasi untuk memaksimalkan fungsi website tersebut.</p>
+      </div>
+    </div>        
+
+  </div>
+</div>
+<!-- Features ends -->
+
+<div class="border"></div>
+
+<!-- Product & links starts -->
+
+  <div class="prod">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="home-links">
+          <div class="col-l">
+            <h5>Laboratorium</h5>
+            <ul>
+              <li><a href="/labs/zamanda">Zamanda</a></li>
+              <li><a href="/labs/siak">SIAK</a></li>
+            </ul>
+          </div>
+          <div class="col-r">
+            <h5>Produk</h5>
+            <ul>
+              <li><a href="/product/faza-shop">Faza Shop</a></li>
+              <li><a href="/product/bsm-retail-pos">BSM Retail POS</a></li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    
+      <div class="col-md-8"> 
+        <div class="home-product">
+          <div class="home-prod-img" id="s1">
+              <img src="/media/portal-source/s1.jpg" class="img-responsive" alt=""/>
+          </div>
+          <h3>Memulai Bersama Kami</h3>
+          <p>Kami bangga dengan apa yang kita lakukan bersama dengan memanfaatkan situs web sebagai sebuah media interaktif komunikasi global untuk kegiatan branding, publikasi, marketing dan komunikasi. Dengan mengaktualisasikan bisnis anda ke dunia internet adalah pilihan bijak bagi proses perkembangan bisnis anda. sehingga bisa menjalin komunikasi antara pemilik dan pengunjungnya.</p>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Product & links ends --> 
+
+
+
+<!-- Color blocks starts -->
+
+  <div class="color-blocks">
+    <div class="row">
+
+      <div class="col-md-4">
+
+        <div class="c-block">
+
+          <!-- Left column with color background -->
+          <div class="col-l b-red">
+            <!-- Link -->
+            <a href="/contact-us">
+              <!-- Icon -->
+              <i class="icon-envelope-alt"></i>
+              <!-- Text -->
+              Kontak Kami
+            </a>
+          </div>
+
+          <div class="col-r b-purple">
+            <a href="/about-us">
+              <i class="icon-user"></i>
+              Tentang Kami
+            </a>
+          </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+      </div>
+      
+      <div class="col-md-4">
+
+        <div class="c-block">
+
+          <!-- Left column with color background -->
+          <div class="col-l b-green">
+            <!-- Link -->
+            <a href="/blog">
+              <!-- Icon -->
+              <i class="icon-comments"></i>
+              <!-- Text -->
+              Blog
+            </a>
+          </div>
+
+          <div class="col-r b-blue">
+            <a href="https://www.facebook.com/pages/BaseSystem-Management/132215933462634" target="_blank">
+              <i class="icon-facebook"></i>
+              Facebook
+            </a>
+          </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+      </div>
+      
+      <div class="col-md-4">
+
+        <div class="c-block">
+
+          <!-- Left column with color background -->
+          <div class="col-l b-lblue">
+            <!-- Link -->
+            <a href="https://twitter.com/exor14" target="_blank">
+              <!-- Icon -->
+              <i class="icon-twitter"></i>
+              <!-- Text -->
+              Twitter
+            </a>
+          </div>
+
+          <div class="col-r b-orange">
+            <a href="https://plus.google.com/101835897323506072586" target="_blank">
+              <i class="icon-google-plus"></i>
+              Google Plus
+            </a>
+          </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+<!-- Color blocks ends -->
+{% endblock %}

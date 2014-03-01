@@ -1,0 +1,30 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+
+<section id="tables">
+					<h2>Nama Domain Email Anda</h2>
+					
+					
+					
+					<table class="table table-bordered table-striped table-highlight">
+						        <thead>
+						          <tr>
+						            <th>Nama Domain</th>
+						            <th>Keterangan</th>
+						          </tr>
+						        </thead>
+						        <tbody>
+						        	{% for dom in domain %}
+						          <tr>
+						          	
+						            <td>{{ dom.domain }}</td>
+						            <td>{{ dom.notes }}</td>
+
+						          </tr>
+						          {% endfor %}
+						        </tbody>
+						      </table>
+
+
+{% endblock %}

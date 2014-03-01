@@ -1,0 +1,41 @@
+{% extends "bbase.html" %}
+
+{% block slider %}{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+
+  <h2>Hasil Pencarian</h2>
+  <p class="big grey">{{ query }}</p>
+  <hr />
+
+ 
+  <div class="row tasks">
+    <div class="col-md-12">
+
+
+
+      <!-- Add the class "important" or "cool" for red and green border -->
+{% if errors %}
+  {% for error in errors %}
+    <div class="alert alert-warning">{{ error }}</div>
+  {% endfor %}
+{% else %}
+        {% if blog %}
+        <h5>Ditemukan {{ blog|length }} post.</h5>
+
+              {% for bl in blog %}
+              <div class="task cool">
+                <h6><a href="/read-blog/{{ bl.id }}">{{ bl.judul }}</a></h6>
+                <p>{{ bl.isi }}</p>
+              </div>
+              {% endfor %}
+        {% else %}
+            <div class="alert alert-info">Tidak ada yang cocok dengan pencarian anda.</div>
+        {% endif %}
+{% endif %}
+    </div>
+  </div>
+
+{% endblock %}

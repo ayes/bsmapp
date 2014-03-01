@@ -1,0 +1,140 @@
+{% extends "bbase.html" %}
+
+{% block slider %}{% endblock %}
+
+{% block content %}
+<div class="content contact">
+  <div class="container">
+
+  <h2>Kontak Kami</h2>
+  <p class="big grey">Berikut ini adalah beberapa cara untuk dapat menghubungi kami.</p>
+  <hr />
+            
+  <div class="row"> 
+        
+                              <div class="col-md-6 col-sm-6">
+                                 <!-- Contact form -->
+                                    <h5>Formulir Kontak</h5>
+                                    <hr />
+                                    {% if error %}<div class="alert alert-warning">{{ error }}</div>{% endif %}
+                                    {% if berhasil %}<div class="alert alert-success">{{ berhasil }}</div>{% endif %}
+                                    <div class="form">
+                                      <!-- Contact form -->
+                                      <form class="form-horizontal" action="/feedback" method="post">
+                                        {% csrf_token %}
+                                          <!-- Name -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="name">Nama</label>
+                                            <div class="col-md-9">
+                                              <input type="text" class="form-control" id="nama" name="nama" value="{{ nama }}" required="required">
+                                            </div>
+                                          </div>
+                                          <!-- Email -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="email">Email</label>
+                                            <div class="col-md-9">
+                                              <input type="email" class="form-control" id="email" name="email" value="{{ email }}" required="required">
+                                            </div>
+                                          </div>
+                                          <!-- ho hp -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="nohp">No HP</label>
+                                            <div class="col-md-9">
+                                              <input type="text" class="form-control" id="nohp" name="nohp" value="{{ nohp }}" required="required">
+                                            </div>
+                                          </div>
+                                          <!-- captcha -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="captcha_image">&nbsp;</label>
+                                          <div class="col-md-9">
+                                            {% autoescape off %}{{ captcha }}{% endautoescape %}
+                                            </div>
+                                          </div>
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="captcha">Kode</label>
+                                            <div class="col-md-9">
+                                              <input type="text" class="form-control" id="captcha" name="code" placeholder="Masukan kode diatas" required="required">
+                                            </div>
+                                          </div>
+                                          <!-- Comment -->
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3" for="komentar">Komentar</label>
+                                            <div class="col-md-9">
+                                              <textarea class="form-control" id="komentar" rows="3" name="komentar" required="required">{{ komentar }}</textarea>
+                                            </div>
+                                          </div>
+                                          <!-- Buttons -->
+                                          <div class="form-group">
+                                             <!-- Buttons -->
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button type="submit" class="btn btn-default">Kirim</button>
+                                                <button type="reset" class="btn btn-default">Reset</button>
+                                             </div>
+                                          </div>
+                                      </form>
+                                    </div>
+                                    <hr />        
+                                           <!-- Social media icons -->
+                                           <h5>Berhubungan:</h5>
+                                           <div class="social">
+                                                <a href="https://www.facebook.com/pages/BaseSystem-Management/132215933462634" target="_blank"><i class="icon-facebook facebook"></i></a>
+                                                <a href="https://twitter.com/exor14" target="_blank"><i class="icon-twitter twitter"></i></a>
+                                                <a href="http://id.linkedin.com/pub/irfan-mahfudz-guntur/4b/64/b01/" target="_blank"><i class="icon-linkedin linkedin"></i></a>
+                                                <a href="https://plus.google.com/101835897323506072586" target="_blank"><i class="icon-google-plus google-plus"></i></a>
+                                                <a href="http://www.pinterest.com/bsmsitedotcom/" target="_blank"><i class="icon-pinterest pinterest"></i></a>
+                                           </div>
+                                           <h5>Dukungan Online:</h5>
+                                           <div>
+<table><tr><td><a href="ymsgr:sendIM?bsmsitecom"><img src="http://opi.yahoo.com/online?u=bsmsitecom&m=g&t=14" border="0" alt="YM : bsmsitecom" /></a>
+</td>
+<td><script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+<script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+<div id="SkypeButton_Call_ayesduana_1">
+  <script type="text/javascript">
+    Skype.ui({
+      "name": "call",
+      "element": "SkypeButton_Call_ayesduana_1",
+      "participants": ["ayesduana"],
+      "imageSize": 32
+    });
+  </script>
+</div>
+</td></tr></table>
+                                           </div>
+
+                           </div>
+                           <div class="col-md-6 col-sm-6">
+                              <h5>Peta Alamat</h5>
+                              <hr />
+                              <!-- Google maps -->
+                              <div class="gmap">
+                                 <!-- Google Maps. Replace the below iframe with your Google Maps embed code -->
+                                 <iframe height="409" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=id&amp;geocode=&amp;q=-0.511501,117.17841&amp;aq=&amp;sll=-0.511802,117.177386&amp;sspn=0.025104,0.042014&amp;ie=UTF8&amp;ll=-0.511802,117.177386&amp;spn=0.025104,0.042014&amp;t=m&amp;z=14&amp;output=embed"></iframe>
+                              </div>
+                              
+                              <hr />
+                                    <!-- Address section -->
+                                       <h5 class="title">Alamat:</h5>
+                                       <div class="address">
+                                           <address>
+                                              <!-- Company name -->
+                                              BaseSystem Management<br>
+                                              <!-- Address -->
+                                              Pondok Sambutan Permai Blok. AG. No. 3<br>
+                                              Samarinda Ilir - Kalimantan Timur<br>
+                                              <!-- Phone number -->
+                                              +62 (812) 534–75–474
+                                           </address>
+                                            
+                                           <address>
+                                              <!-- Name -->
+                                              Irfan Mahfudz Guntur<br>
+                                              <!-- Email -->
+                                              <a href="mailto:ayes@bsmsite.com">ayes@bsmsite.com</a>
+                                           </address> 
+                                       </div>
+                           </div>
+
+    
+   </div>
+{% endblock %}

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block media %}
+  <title>BaseSystem Management - Web Development Company</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  {% endblock %}
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
+  <link href="http://bsmsite.com/media/thema/style/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://bsmsite.com/media/thema/style/font-awesome.css">
+  {% block nbcss %}
+  <link rel="stylesheet" href="http://bsmsite.com/media/thema/style/slider.css">
+  {% endblock %}
+  <link rel="stylesheet" href="http://bsmsite.com/media/thema/style/flexslider.css">
+  <link href="http://bsmsite.com/media/thema/style/style.css" rel="stylesheet">
+  <link href="http://bsmsite.com/media/thema/style/{% block templatecolor %}{{ style }}{% endblock %}" rel="stylesheet">
+  <link href="http://bsmsite.com/media/thema/gh-fork-ribbon.css" rel="stylesheet">
+  <!-- HTML5 Support for IE -->
+  <!--[if lt IE 9]>
+  <script src="thema/style/js/html5shim.js"></script>
+  <![endif]-->
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="http://bsmsite.com/media/thema/img/favicon/favicon.png">
+  <style>
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+<!-- Header Starts -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="logo">
+          <h1><a href="/" data-no-instant>BaseSystem <span class="color">Management</span></a></h1>
+          <div class="hmeta">Web Development Company</div>
+          </div>
+        </div>
+
+      <div class="col-md-4 text-right">
+
+        <form class="form-inline" role="form" action="/search/" method="get">
+          <div class="form-group">
+          <input type="text" class="form-control" id="search" placeholder="Ketik Sesuatu..." maxlength="200" required="required" name="q">
+          </div>
+          <button type="submit" class="btn btn-default">Cari</button>
+        </form>
+      </div>
+      </div>
+    </div>
+  </header>
+
+<!-- Navigation bar starts -->
+  <div class="navbar bs-docs-nav" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+      </div>
+
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/" data-no-instant>Beranda</a></li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produk <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        <li><a href="/product/faza-shop">Faza Shop</a></li>
+        <li><a href="/product/bsm-retail-pos">BSM Retail POS</a></li>
+        </ul>
+        </li>                   
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layanan<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        <li><a href="/service/web-development">Website</a></li>
+        <li><a href="/service/mail-server">Mail Server</a></li>
+        <li><a href="/service/radio-streaming">Radio Streaming</a></li>
+        </ul>
+        </li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Labs<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        <li><a href="/labs/zamanda">Zamanda</a></li>
+        <li><a href="/labs/siak">SIAK</a></li>
+        </ul>
+        </li>
+        <li><a href="/about-us">Tentang Kami</a></li>
+        <li><a href="/blog">Blog</a></li>                 
+        <li><a href="/portfolio" data-no-instant>Portfolio</a></li>
+        <li><a href="/contact-us">Kontak Kami</a></li>
+      </ul>
+    </nav>
+    </div>
+  </div>
+<!-- Navigation bar ends -->
+
+{% block slider %}
+<!-- Slider starts -->
+  <div class="full-slider">
+  <!-- Slider (Flex Slider) -->
+  <div class="container">
+  <div class="row">
+  <div class="col-md-12">
+  <div class="flexslider">
+  <ul class="slides">
+
+  <li>
+
+  <!-- Slider content -->
+  <div class="flex-caption">
+  <!-- Left column -->
+  <div class="col-l">
+
+  <h2>Apa yang dimulai hari ini</h2>
+
+  <h6>BaseSystem Management selalu memiliki semangat untuk menciptakan sebuah produk yang sukses di pasaran. Sejauh ini kami telah membuat beberapa produk berbasis website yang berguna dan sesuai dengan kebutuhan. BaseSystem Management telah bekerja dengan klien global sejak tahun 2008 dalam mengembangkan produk bernilai.</h6>
+
+
+  </div>
+  <!-- Right column -->
+  <div class="col-r">
+
+  <!-- Use the class "flex-back" to add background inside flex slider -->
+
+  <h5>Faza Shop - Website Penjualan Produk</h5>
+  <p>Situs penjualan berbasis website yang dikemas secara menarik dan tepat pada sasaran. Untuk memenuhi kebutuhan penjualan dan promosi produk Anda</p>
+
+
+  <!-- Button -->
+  <div class="button">
+  <a href="/product/faza-shop"><i class="icon-circle-arrow-down"></i> Lihat Lebih Lanjut</a>
+  </div>
+
+  </div>
+  </div>
+
+  </li>
+
+  <li>
+  <div class="flex-caption flex-center">
+  <h2>BSM Retail POS</h2>
+
+  <p>Software Retail Point of Sale berbasis website untuk membantu transaksi penjualan barang, pencatatan kas dan stock secara online karena itu BSM Retail POS ini berbasis website.</p>
+
+  <!-- Button -->
+  <div class="button">
+  <a href="/product/bsm-retail-pos">Selengkapnya</a>
+  </div>
+
+  </div>
+  </li>
+
+
+  <li>
+
+  <!-- Slider content -->
+  <div class="flex-caption">
+  <!-- Left column -->
+  <div class="col-l">
+  <h2>BSM Mail Server</h2>
+  <h6>Paket email server sangat cocok untuk perusahaan yang ingin memiliki email pribadi dengan domain sendiri.</h6>
+
+  <!-- Button -->
+  <div class="button">
+  <a href="/service/mail-server"><i class="icon-circle-arrow-down"></i> Lihat Detail</a>
+  </div>
+
+  </div>
+  <!-- Right column -->
+  <div class="col-r">
+
+  <!-- Use the class "flex-back" to add background inside flex slider -->
+  <div class="flex-back">
+  <h5>Memulai Hari Ini</h5>
+  <p>BaseSystem Management adalah spesialis dalam pengembangan proyek berbasis web! BaseSystem management menyediakan layanan teknologi inovatif dan solusi berbasis web kustom untuk startups kecil dan organisasi besar. BaseSystem Management juga menyediakan layanan mail server dan networking spesialis.</p>
+  </div>
+
+  </div>
+  </div>
+
+  </li>
+
+
+  <li>
+
+  <!-- Slider content -->
+  <div class="flex-caption">
+  <!-- Left column -->
+  <div class="col-l">
+  <h2>Seseorang Memulai Hari Ini</h2>
+  <h6>Apakah Anda siap untuk membawa bisnis Anda menembus pasar global? Dengan keberadaaan semua situs online bersaing saat ini Anda tidak perlu khawatir jika Anda serius dan membuat target pasar Anda untuk diperhatikan secara instan, Anda memerlukan Kami! Kami di BaseSystem Management benar-benar memahami kebutuhan ini.</h6>
+
+
+
+  </div>
+  <!-- Right column -->
+  <div class="col-r">
+
+  <!-- Use the class "flex-back" to add background inside flex slider -->
+
+  <h2>Pengembangan Website</h2>
+  <p>Kami  memberikan  solusi  praktis  perancangan & pengembangan  web.  Tujuan kami adalah membantu  proses  bisnis 
+  yang ingin memanfaatkan situs web, sebagai sebuah media interaktif  komunikasi  global  untuk  kegiatan  branding,  publikasi, marketing dan komunikasi. Mengaktualisasikan  bisnis  anda  ke  dunia  internet  adalah  pilihan  bijak  bagi 
+  proses perkembangan bisnis.</p>
+
+
+  </div>
+  </div>
+
+  </li>
+
+
+  </ul>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+<!-- Slider Ends -->
+{% endblock %}
+{% block content %}{% endblock %}
+
+
+
+
+  </div>
+</div>
+
+<!-- Social -->
+
+<div class="social-links">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="big"><span>Follow Kami Di</span> <a href="https://www.facebook.com/pages/BaseSystem-Management/132215933462634" target="_blank"><i class="icon-facebook"></i>Facebook</a> <a href="https://twitter.com/exor14" target="_blank"><i class="icon-twitter"></i>Twitter</a> <a href="https://plus.google.com/101835897323506072586" target="_blank"><i class="icon-google-plus"></i>Google Plus</a> <a href="http://id.linkedin.com/pub/irfan-mahfudz-guntur/4b/64/b01/" target="_blank"><i class="icon-linkedin"></i>LinkedIn</a></p>
+      </div>
+    </div>    
+  </div>
+</div>
+
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="widgets">
+        <div class="col-md-4">
+          <div class="fwidget">
+
+            <div class="col-l">
+              <h6>Produk</h6>
+              <ul>
+              <li><a href="/product/faza-shop">Faza Shop</a></li>
+              <li><a href="/product/bsm-retail-pos">BSM Retail POS</a></li>
+
+              </ul>
+            </div>
+
+            <div class="col-r">
+              <h6>Layanan</h6>
+              <ul>
+				<li><a href="/service/web-development">Website</a></li>
+				<li><a href="/service/mail-server">Mail Server</a></li>
+				<li><a href="/service/radio-streaming">Radio Streaming</a></li>
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="fwidget">
+            <h6>Laboratorium</h6>
+            <ul>
+              <li><a href="/labs/zamanda">Zamanda</a></li>
+              <li><a href="/labs/siak">SIAK</a></li>
+            </ul>
+          </div>
+        </div>
+
+         <div class="col-md-2">
+          <div class="fwidget">
+            <h6>Blog Kategori</h6>
+            <ul>
+            {% for kategori in kategori_list %}
+            <li><a href="/blog-category/{{ kategori.id }}">{{ kategori }}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="fwidget">
+            <h5 class="title">Alamat:</h5>
+                                       <div class="address">
+                                           <address>
+                                              <!-- Company name -->
+                                              BaseSystem Management<br />
+                                              <!-- Address -->
+                                              Pondok Sambutan Permai Blok. AG. No. 3<br />
+                                              Samarinda - 75115<br />
+                                              Kalimantan Timur<br />
+                                              Indonesia<br />
+                                              <!-- Phone number -->
+                                              +62 (812) 534–75–474
+                                           </address>
+                                            
+                                           <address>
+                                              <!-- Name -->
+                                              Irfan Mahfudz Guntur<br>
+                                              <!-- Email -->
+                                              <a href="mailto:ayes@bsmsite.com">ayes@bsmsite.com</a>
+                                           </address> 
+                                       </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-md-12">
+          <div class="copy">
+            <h6>BaseSystem <span class="color">Management</span></h6>
+            <p>Copyright &copy; 2006 - 2014 <a href="http://bsmsite.com/" data-no-instant>BaseSystem Management</a> - <a href="/" data-no-instant>Beranda</a> | <a href="/about-us">Tentang Kami</a> | <a href="#">FAQ</a> | <a href="/contact-us">Kontak Kami</a></p>
+          </div>
+      </div>
+    </div>
+  <div class="clearfix"></div>
+  </div>
+</footer> 
+
+<!-- JS -->
+<script src="http://bsmsite.com/media/thema/js/jquery.js"></script>
+<script src="http://bsmsite.com/media/thema/js/bootstrap.js"></script> 
+<script src="http://bsmsite.com/media/thema/js/jquery.isotope.js"></script> <!-- Isotope for gallery -->
+<script src="http://bsmsite.com/media/thema/js/jquery.prettyPhoto.js"></script> <!-- prettyPhoto for images -->
+<script src="http://bsmsite.com/media/thema/js/jquery.cslider.js"></script> <!-- Parallax slider -->
+<script src="http://bsmsite.com/media/thema/js/modernizr.custom.28468.js"></script>
+<script src="http://bsmsite.com/media/thema/js/filter.js"></script> <!-- Filter for support page -->
+<script src="http://bsmsite.com/media/thema/js/cycle.js"></script> <!-- Cycle slider -->
+<script src="http://bsmsite.com/media/thema/js/jquery.flexslider-min.js"></script> <!-- Flex slider -->
+<script src="http://bsmsite.com/media/thema/js/easing.js"></script> <!-- Easing -->
+<script src="http://bsmsite.com/media/thema/js/custom.js"></script>
+<script src="/media/thema/js/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+</body>
+</html>

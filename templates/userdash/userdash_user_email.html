@@ -1,0 +1,49 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+
+<div class="row">
+<div class="span4"><h2>Daftar User Email Anda </h2>
+</div>
+<div class="span8 text-right">
+<a href="/add-user-email" class="btn btn-large btn-secondary">Buat User Email Baru</a>
+</div>
+</div>
+<hr />
+<section id="tables">
+					
+					
+					
+					
+					<table class="table table-bordered table-striped table-highlight">
+						        <thead>
+						          <tr>
+						            <th>Nama User</th>
+						            <th>Nama Domain</th>
+						            <th>Keterangan</th>
+						            <th>user ID</th>
+						            <th>password</th>
+						            <th>quota</th>
+						            <th>Aktif</th>
+						            <th>Aksi</th>
+						          </tr>
+						        </thead>
+						        <tbody>
+						        	{% for usr in usermail %}
+						          <tr>
+						          	
+						            <td>{{ usr.username }}</td>
+						            <td>{{ usr.domain }}</td>
+						            <td>{{ usr.domain.notes }}</td>
+						            <td>{{ usr.domain.user_id }}</td>
+						            <td>{{ usr.password }}</td>
+						            <td>{{ usr.quota }}</td>
+						            <td>{{ usr.active }}</td>
+						            <td><a href="/edit-user-email/{{ usr.id }}" <span class="label label-primary">Ganti</span></td>
+						          </tr>
+						          {% endfor %}
+						        </tbody>
+						      </table>
+
+
+{% endblock %}

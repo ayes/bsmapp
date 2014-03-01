@@ -1,0 +1,51 @@
+{% extends "bbase.html" %}
+
+{% block slider %}{% endblock %}
+
+{% block nbcss %}
+<link href="http://bsmsite.com/media/thema/style/prettyPhoto.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+
+  <h2>Portfolio</h2>
+  <p class="big grey">Seseorang Memulai Hari Ini.</p>
+  <hr />
+
+  <div class="row">
+    <div class="col-md-12">
+
+                    <div class="img-portfolio">
+                    <p>
+                        <!-- Add filter names inside "data-filter". For example ".web-design", ".seo", etc., Filter names are used to filter the below images. -->
+                           <ul id="filters">
+                             <li><a href="#" data-filter="*" class="btn btn-success">Semua</a></li>
+                             {% for kt in kategori %}
+                             <li><a href="#" data-filter=".{{ kt.kategori }}" class="btn btn-success">{{ kt.kategori }}</a></li>
+                             {% endfor %}
+                           </ul>
+                    </p>
+                        
+                        
+                    <div id="portfolio">
+                        <!-- Add the above used filter names inside div tag. You can add more than one filter names. For image lightbox you need to include "a" tag pointing to image link, along with the class "prettyphoto". -->                        
+                       {% for pf in portfolio %}
+                       <div class="element {{ pf.kategori }}"><a href="/media/{{ pf.gambar_besar }}" class="prettyphoto" data-no-instant>
+                           <img src="/media/{{ pf.gambar_kecil }}" alt=""/></a>
+                           <!-- Portfolio caption -->
+                           <div class="pcap">
+                              <h4>{{ pf.judul }}</h4>
+                              <p>{{ pf.deskripsi }}<br />
+                                <a href="{{ pf.website }}" target="{{ pf.target_url }}">Lihat Website <i class="icon-double-angle-right"></i></a>
+                              </p>
+                           </div>
+                       </div>
+                       {% endfor %}
+                    </div>
+               </div>
+    </div>
+  </div>
+
+{% endblock %}

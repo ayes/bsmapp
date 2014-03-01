@@ -1,0 +1,96 @@
+{% extends "bbase.html" %}
+
+{% block slider %}{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+
+  <h2>Blog</h2>
+  <p class="big grey">Seseorang Memulai Dari Sini</p>
+  <hr />
+
+  <!-- Blog starts -->
+            
+            <div class="blog">
+               <div class="row">
+                  <div class="col-md-12">
+                     
+                     <!-- Blog Posts -->
+                     <div class="row">
+                        <div class="col-md-8 col-sm-8">
+                           <div class="posts">
+                           
+                              <!-- Each posts should be enclosed inside "entry" class" -->
+                              <!-- Post one -->
+                              <div class="entry">
+                                 <h2>{{ bl.judul }}</h2>
+                                 
+                                 <!-- Meta details -->
+                                 <div class="meta">
+                                    <i class="icon-calendar"></i> {{ bl.tanggal }} <i class="icon-user"></i> {{ bl.penulis }} <i class="icon-folder-open"></i> <a href="#">{{bl.kategori}}</a> <span class="pull-right"><i class="icon-comment"></i> <a href="#">2 Comments</a></span>
+                                 </div>
+                                 
+                                 <!-- Thumbnail -->
+                                 <div class="bthumb2">
+                                    <img src="{{ bl.gambar.url_250x180 }}" alt="" />
+                                 </div>
+                                 
+                                 <p>{{bl.isi}}</p>                           
+                              </div>
+                              
+                              <div class="post-foot well">
+                                 <!-- Social media icons -->
+                                 <div class="social">
+                                    <h6>Sharing is Sexy: </h6>
+                                    <a href="#"><i class="icon-facebook facebook"></i></a>
+                                    <a href="#"><i class="icon-twitter twitter"></i></a>
+                                    <a href="#"><i class="icon-linkedin linkedin"></i></a>
+                                    <a href="#"><i class="icon-pinterest pinterest"></i></a>
+                                    <a href="#"><i class="icon-google-plus google-plus"></i></a>
+                                 </div>
+                              </div>     
+
+                               <hr />
+
+                               
+
+                              <div class="clearfix"></div>
+                              
+                           </div>
+                        </div>                        
+                        <div class="col-md-4 col-sm-4">
+                           <div class="sidebar">
+                              <!-- Widget -->
+                              <div class="widget">
+                                 <h4>Kategori</h4>
+                                 <ul>
+                                    {% for kategori in kategori_list %}
+                                    <li><a href="/category-blog/{{ kategori.id }}">{{ kategori }}</a></li>
+                                    {% endfor %}
+                                 </ul>
+                              </div>
+                              <div class="widget">
+                                 <h4>Posting Lainnya</h4>
+                                 <ul>
+                                    {% for pl in pl_list %}
+                                    <li><a href="/read-blog/{{ pl.id }}">{{ pl.judul }}</a></li>
+                                    {% endfor %}
+                                 </ul>
+                              </div>
+                              <div class="widget">
+                                 <h4>Kata Pengantar</h4>
+                                 <p>Kami sangat berharap blog ini bermanfaat, walaupun sederhana semoga isinya dapat dipahami bagi siapapun yang membacanya. Sekiranya blog yang telah ditulis ini dapat berguna bagi kami sendiri maupun orang yang membacanya. Sebelumnya kami mohon maaf apabila terdapat kesalahan kata-kata yang kurang berkenan dan kami memohon kritik dan saran yang membangun demi perbaikan di masa depan, mengingat tidak ada sesuatu yang sempurna tanpa sarana yang membangun.</p>
+                              </div>                             
+                           </div>                                                
+                        </div>
+                     </div>
+                     
+                     
+                     
+                  </div>
+               </div>
+            </div>
+
+
+{% endblock %}
