@@ -1,3 +1,0 @@
-[submodule "paypal"]
-	path = paypal
-	url = https://github.com/spookylukey/django-paypal.git
