@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from paypal.standard.ipn.signals import payment_was_successful
+
 
 class UserBalance(models.Model):
 	user = models.ForeignKey(User, unique=True)
@@ -10,3 +12,12 @@ class UserBalance(models.Model):
 
 	class Meta:
 		db_table = 'userdash_user_balance'
+
+def show_me_the_money(sender, **kwargs):
+	ipn_obj = sender
+	user = request.user
+	balance =  UserBalance.objects.get(user_id=user.pk)
+	balance.balance += 1.00
+	balance.save()
+
+payment_was_successful.connect(show_me_the_money)

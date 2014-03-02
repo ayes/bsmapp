@@ -194,8 +194,8 @@ def deposit_paypal(request):
         "amount": "1.00",
         "item_name": "name of the item",
         "invoice": generate_code(),
-        "notify_url": "http://bsmsite.com/" + reverse('paypal-ipn'),
-        "return_url": "http://bsmsite.com/dashboard-cust/kelola-pembayaran/",
+        "notify_url": "http://127.0.0.1:8000" + reverse('paypal-ipn'),
+        "return_url": "http://127.0.0.1:8000/dashboard-cust/kelola-pembayaran/",
         "cancel_return": "http://bsmsite.com/your-cancel-location/",
 
     }
@@ -203,23 +203,4 @@ def deposit_paypal(request):
     form = PayPalPaymentsForm(initial=paypal_dict)
     context = {'form': form}
     return render_to_response("userdash_paypal.html", context)
-
-from paypal.standard.ipn.signals import payment_was_successful
-
-@login_required()
-@csrf_exempt
-def show_me_the_money(sender, **kwargs):
-	ipn_obj = sender
-
-	if ipn_obj.payment_status == "Completed":
-		balance = get_balance(request)
-		balance.balance += 1
-		balance.save()
-	#ipn_obj = sender
-    # Undertake some action depending upon `ipn_obj`.
-    #if ipn_obj.custom == "Upgrade all users!":
-    #    Users.objects.update(paid=True)
-    #print __file__,1, 'This works'        
-payment_was_successful.connect(show_me_the_money)
-
 
