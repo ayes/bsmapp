@@ -207,5 +207,5 @@ def deposit_paypal(request):
 	}
 
 	form = PayPalPaymentsForm(initial=paypal_dict)
-	context = {'form': form, 'depo':deposit}
+	context = {'form': form, 'depo':deposit, 'user_balance':get_balance(request)}
 	return render_to_response("userdash_paypal.html", context)
