@@ -23,3 +23,14 @@ def show_me_the_money(sender, **kwargs):
 		balance.save()
 
 payment_was_successful.connect(show_me_the_money)
+
+def show_me_the_money_flagged(sender, **kwargs):
+	ipn_obj = sender
+
+	if ipn_obj.payment_status == "Completed":
+		user = request.user
+		balance =  UserBalance.objects.get(user_id=user.pk)
+		balance.balance += 1
+		balance.save()
+
+payment_was_flagged.connect(show_me_the_money_flagged)
