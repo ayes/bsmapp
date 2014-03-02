@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from paypal.standard.ipn.signals import payment_was_successful, payment_was_flagged
+from paypal.standard.ipn.signals import payment_was_successful
+from django.dispatch import receiver
 
 
 class UserBalance(models.Model):
@@ -13,6 +14,7 @@ class UserBalance(models.Model):
 	class Meta:
 		db_table = 'userdash_user_balance'
 
+@receiver(payment_was_successful)
 def show_me_the_money(sender, **kwargs):
 	ipn_obj = sender
 
@@ -21,16 +23,3 @@ def show_me_the_money(sender, **kwargs):
 		balance =  UserBalance.objects.get(user_id=user.pk)
 		balance.balance += 1
 		balance.save()
-
-payment_was_successful.connect(show_me_the_money)
-
-def show_me_the_money_flagged(sender, **kwargs):
-	ipn_obj = sender
-
-	if ipn_obj.payment_status == "Completed":
-		user = request.user
-		balance =  UserBalance.objects.get(user_id=user.pk)
-		balance.balance += 1
-		balance.save()
-
-payment_was_flagged.connect(show_me_the_money_flagged)
