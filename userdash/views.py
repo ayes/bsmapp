@@ -10,6 +10,7 @@ from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
 from django.core.urlresolvers import reverse
 import random
+from django.views.decorators.http import require_POST
 
 def get_balance(request):
 	user = request.user
@@ -186,14 +187,18 @@ def generate_code():
 
 
 @login_required()
+@require_POST
 @csrf_exempt
 def deposit_paypal(request):
 	user = request.user
 
+	if request.method == 'POST':
+		deposit = request.POST.get('deposit', '')
+
 	paypal_dict = {
 		"business": settings.PAYPAL_RECEIVER_EMAIL,
-		"amount": "0.01",
-		"item_name": "BSM Depsoti",
+		"amount": deposit,
+		"item_name": "BSM Deposit",
 		"item_number": user.id,
 		"invoice": generate_code(),
 		"notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
@@ -202,5 +207,5 @@ def deposit_paypal(request):
 	}
 
 	form = PayPalPaymentsForm(initial=paypal_dict)
-	context = {'form': form}
+	context = {'form': form, 'depo':deposit}
 	return render_to_response("userdash_paypal.html", context)

@@ -7,7 +7,31 @@
 <p class="help-block"><strong>Note:</strong> Dana milik Anda.</p>
 </div>
 <div class="span8">
-<a href="/dashboard-cust/deposit-paypal">Deposit Via Paypal.</a>
+
+ <!-- Contact form -->
+                                    <form id="contact-form" class="form-horizontal" action="/dashboard-cust/deposit-paypal" method="post">
+                                   	{% csrf_token %}
+                                    <fieldset>
+
+									<div class="control-group">
+									<label class="control-label" for="deposit">Jumlah Deposit</label>
+									<div class="controls">
+									<select id="deposit" name="deposit">
+									<option value="5.00">$ 5.00 USD</option>
+									<option value="10.00">$ 10.00 USD</option>
+									<option value="25.00">$ 25.00 USD</option>
+									<option value="50.00">$ 50.00 USD</option>
+									<option value="100.00">$ 100.00 USD</option>
+									</select>
+									</div>
+									</div>
+
+									<div class="form-actions">
+									<button type="submit" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Deposit Via Paypal</button>
+									</div>
+
+                                          </fieldset>
+                                      </form>
 </div>
 </div>
 {% endblock %}

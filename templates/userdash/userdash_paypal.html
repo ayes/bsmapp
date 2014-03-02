@@ -1,8 +1,11 @@
 {% extends "userdash_bbase.html" %}
 
 {% block content %}
-
-<h1>Show me the money.!</h1>
+<center>
+<h1>Deposit via Paypal.!</h1>
 <!-- writes out the form tag automatically -->
+<h3>Jumlah yang akan Anda depositkan: $ {{ depo }} USD ?</h3>
+<p class="help-block"><strong>Note:</strong> Tekan tombol paypal BUY NOW jika ingin melanjutkan.</p>
 {{ form.sandbox }}
+</center>
 {% endblock %}
