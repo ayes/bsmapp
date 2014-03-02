@@ -10,4 +10,3 @@ class UserBalance(models.Model):
 
 	class Meta:
 		db_table = 'userdash_user_balance'
-

@@ -23,7 +23,7 @@ class MailUserAdmin(admin.ModelAdmin):
 	list_filter = ('domain',)
 
 class MailQuotaAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('__unicode__', 'price')
 
 admin.site.register(MailDomain, MailDomainAdmin)
 admin.site.register(MailUser, MailUserAdmin)

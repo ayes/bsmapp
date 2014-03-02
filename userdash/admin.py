@@ -1,4 +1,7 @@
 from django.contrib import admin
 from userdash.models import *
 
-admin.site.register(UserBalance)
+class UserBalanceAdmin(admin.ModelAdmin):
+	list_display = ('__unicode__', 'balance')
+
+admin.site.register(UserBalance, UserBalanceAdmin)

@@ -169,9 +169,10 @@ def create_user_email(request):
 	else:
 		return HttpResponseRedirect('/dashboard-cust/add-user-email')
 
-from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 @login_required()
+@csrf_exempt
 def kelola_pembayaran(request):
 
 	return render_to_response('userdash_kelola_pembayaran.html', {'user_balance':get_balance(request)}, RequestContext(request))
@@ -183,10 +184,9 @@ def generate_code():
 	
 	return result
 
-from django.views.decorators.csrf import csrf_protect
 
 @login_required()
-@csrf_protect
+@csrf_exempt
 def deposit_paypal(request):
 
     paypal_dict = {
@@ -194,7 +194,7 @@ def deposit_paypal(request):
         "amount": "1.00",
         "item_name": "name of the item",
         "invoice": generate_code(),
-        "notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
+        "notify_url": "http://bsmsite.com/" + reverse('paypal-ipn'),
         "return_url": "http://bsmsite.com/dashboard-cust/kelola-pembayaran/",
         "cancel_return": "http://bsmsite.com/your-cancel-location/",
 
@@ -206,7 +206,8 @@ def deposit_paypal(request):
 
 from paypal.standard.ipn.signals import payment_was_successful
 
-@csrf_protect
+@login_required()
+@csrf_exempt
 def show_me_the_money(sender, **kwargs):
 	ipn_obj = sender
 
@@ -220,3 +221,5 @@ def show_me_the_money(sender, **kwargs):
     #    Users.objects.update(paid=True)
     #print __file__,1, 'This works'        
 payment_was_successful.connect(show_me_the_money)
+
+
