@@ -17,7 +17,7 @@ def show_me_the_money(sender, **kwargs):
 	ipn_obj = sender
 	balance = UserBalance.objects.get(user_id=ipn_obj.item_number)
 	if ipn_obj.payment_status == "Completed":
-		balance.balance += ipn_obj.amount
+		balance.balance += ipn_obj.mc_gross
 		balance.save()
 
 payment_was_successful.connect(show_me_the_money)
