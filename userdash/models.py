@@ -15,9 +15,6 @@ class UserBalance(models.Model):
 
 def show_me_the_money(sender, **kwargs):
 	user = request.user
-	print user
-	balance = UserBalance.objects.get(user_id=user.pk)
-	balance.balance += 1
-	balance.save()
+	print user.id
 
 payment_was_successful.connect(show_me_the_money)
