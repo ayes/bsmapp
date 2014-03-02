@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from paypal.standard.ipn.signals import payment_was_successful
-import decimal
 
 
 class UserBalance(models.Model):
@@ -18,7 +17,7 @@ def show_me_the_money(sender, **kwargs):
 	ipn_obj = sender
 	balance = UserBalance.objects.get(user_id=ipn_obj.item_number)
 	if ipn_obj.payment_status == "Completed":
-		balance.balance += decimal.Decimal(ipn_obj.amount)
+		balance.balance += ipn_obj.amount
 		balance.save()
 
 payment_was_successful.connect(show_me_the_money)
