@@ -14,6 +14,8 @@ class UserBalance(models.Model):
 		db_table = 'userdash_user_balance'
 
 def show_me_the_money(sender, **kwargs):
+	user = request.user
+	print user
 	balance = UserBalance.objects.get(user_id=user.pk)
 	balance.balance += 1
 	balance.save()
