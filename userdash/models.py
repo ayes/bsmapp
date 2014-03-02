@@ -15,9 +15,11 @@ class UserBalance(models.Model):
 
 def show_me_the_money(sender, **kwargs):
 	ipn_obj = sender
-	user = request.user
-	balance =  UserBalance.objects.get(user_id=user.pk)
-	balance.balance += 1.00
-	balance.save()
+
+	if ipn_obj.payment_status == "Completed":
+		user = request.user
+		balance =  UserBalance.objects.get(user_id=user.pk)
+		balance.balance += 1
+		balance.save()
 
 payment_was_successful.connect(show_me_the_money)

@@ -6,7 +6,7 @@ from django.contrib import auth
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from acp.models import *
 from userdash.forms import *
-from bsmapp.settings import PAYPAL_RECEIVER_EMAIL
+from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
 from django.core.urlresolvers import reverse
 import random
@@ -190,7 +190,7 @@ def generate_code():
 def deposit_paypal(request):
 
     paypal_dict = {
-        "business": PAYPAL_RECEIVER_EMAIL,
+        "business": settings.PAYPAL_RECEIVER_EMAIL,
         "amount": "1.00",
         "item_name": "name of the item",
         "invoice": generate_code(),
@@ -203,4 +203,3 @@ def deposit_paypal(request):
     form = PayPalPaymentsForm(initial=paypal_dict)
     context = {'form': form}
     return render_to_response("userdash_paypal.html", context)
-
