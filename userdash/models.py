@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from paypal.standard.ipn.signals import payment_was_successful
+from paypal.standard.ipn.signals import payment_was_successful, payment_was_flagged
 
 
 class UserBalance(models.Model):

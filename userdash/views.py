@@ -191,7 +191,7 @@ def deposit_paypal(request):
 
     paypal_dict = {
         "business": settings.PAYPAL_RECEIVER_EMAIL,
-        "amount": "1.00",
+        "amount": "0.01",
         "item_name": "name of the item",
         "invoice": generate_code(),
         "notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
