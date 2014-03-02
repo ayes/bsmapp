@@ -188,11 +188,13 @@ def generate_code():
 @login_required()
 @csrf_exempt
 def deposit_paypal(request):
+	user = request.user
 
     paypal_dict = {
         "business": settings.PAYPAL_RECEIVER_EMAIL,
         "amount": "0.01",
-        "item_name": "name of the item",
+        "item_name": "BSM Depsoti",
+        "item_number": user.id,
         "invoice": generate_code(),
         "notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
         "return_url": "http://bsmsite.com/dashboard-cust/kelola-pembayaran/",
