@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from userdash.models import UserBalance
+from userdash.models import *
 from django.contrib import auth
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from acp.models import *
