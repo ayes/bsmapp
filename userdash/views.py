@@ -233,7 +233,8 @@ def kelola_pembayaran(request):
 @csrf_exempt
 def deposit_paypal(request):
 	user = request.user
-	no_invoice = generate_code()
+	parts = ('PP', user.pk, generate_code())
+	no_invoice = "-".join(str(s) for s in parts if s is not None)
 
 	if request.method == 'POST':
 		deposit = request.POST.get('deposit', '')
