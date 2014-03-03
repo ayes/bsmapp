@@ -1,0 +1,22 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+
+<div class="row">
+      
+      <div class="span12">
+<h5>Ganti User Email</h5>
+                                    {% if error %}<div class="alert alert-warning">{{ error }}</div>{% endif %}
+                                    {% if berhasil %}<div class="alert alert-success">{{ berhasil }}</div>{% endif %}
+                              
+  <FORM action="/dashboard-cust/customer-profile" method="POST" class="register">
+    {% csrf_token %}
+  {{ form.as_p }}
+  
+  <div class="form-actions">
+                  <button type="submit" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Ganti Profil</button>
+                  </div>
+  </FORM>
+                    </div>
+                    </div>
+{% endblock %}

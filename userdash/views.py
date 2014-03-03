@@ -185,6 +185,28 @@ def cash_book(request):
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 @login_required()
+def customer_profile(request, error = None, berhasil = None, success = False):
+	if request.method == 'GET':
+		form = UserForm(instance=request.user)
+		return render_to_response('userdash_edit_customer_profile.html', {'form': form, 'error':error,'success': success,}, RequestContext(request))
+	elif request.method == 'POST':
+		first_name = request.POST.get('first_name', '')
+		last_name = request.POST.get('last_name', '')
+		email = request.POST.get('email', '')
+
+		if (len(first_name) == 0) or (len(last_name) == 0) or (len(email) == 0):
+			form = UserForm(instance=request.user)
+			error = 'Anda harus mengisi semua bidang'
+			return render_to_response('userdash_edit_customer_profile.html', {'form': form, 'error':error,'success': success,}, RequestContext(request))
+		else:
+			userprofile = User.objects.get(id=request.user.id)
+			userprofile.first_name = first_name
+			userprofile.last_name = last_name
+			userprofile.email= email
+			userprofile.save()
+			return HttpResponseRedirect('/dashboard-cust/customer-profile')
+		
+@login_required()
 @csrf_exempt
 def kelola_pembayaran(request):
 

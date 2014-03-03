@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 	url(r'^dashboard-cust/kelola-pembayaran/?', 'userdash.views.kelola_pembayaran'),
 	url(r'^dashboard-cust/deposit-paypal/?', 'userdash.views.deposit_paypal'),
 	url(r'^dashboard-cust/cash-book/?', 'userdash.views.cash_book'),
+	url(r'^dashboard-cust/customer-profile/?', 'userdash.views.customer_profile'),
 )
 
 urlpatterns += patterns('',
