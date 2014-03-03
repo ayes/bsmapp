@@ -49,7 +49,7 @@ def user_email(request):
 	return render_to_response('userdash_user_email.html', {'user_balance':get_balance(request), 'usermail':usermail}, RequestContext(request))
 
 @login_required()
-def edit_user_email(request, post_id):
+def edit_user_email(request, error = None, post_id = None):
 	user = request.user
 
 	try:
@@ -66,8 +66,11 @@ def edit_user_email(request, post_id):
 		{
 			'user_balance':get_balance(request),
 			'usermail':usermail,
+			'error':error,
 			'domain':domain
 		}, RequestContext(request))
+
+from django.db.models import Q
 
 @login_required()
 @require_POST
@@ -87,6 +90,14 @@ def update_user_email(request):
 		
 		if (len(username) == 0) or (len(domain) == 0) or (len(password) == 0):
 			return edit_user_email(request, u'Anda harus mengisi semua bidang')
+
+		try:
+			user_identic = MailUser.objects.select_related('domain').get(~Q(id=idmail), username=username, domain__id=domain)
+		except:
+			user_identic = None
+
+		if user_identic is not None:
+			return edit_user_email(request, u'username tersebut sudah ada', idmail)
 
 		dom = MailDomain.objects.get(pk=domain)
 		usermail = MailUser.objects.get(id=idmail)
