@@ -200,7 +200,7 @@ def cash_book(request):
 	user = request.user
 
 	try:
-		cash_book =  CashBook.objects.filter(user_id=user.pk)
+		cash_book =  CashBook.objects.filter(user_id=user.pk).order_by('-id')
 	except:
 		cash_book = {}
 
