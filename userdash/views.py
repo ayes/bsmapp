@@ -11,6 +11,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.core.urlresolvers import reverse
 import random
 from django.views.decorators.http import require_POST
+from datetime import datetime, timedelta
 
 def get_balance(request):
 	user = request.user
@@ -68,6 +69,8 @@ def edit_user_email(request, post_id):
 			'domain':domain
 		}, RequestContext(request))
 
+@login_required()
+@require_POST
 def update_user_email(request):
 	user = request.user
 
@@ -81,16 +84,15 @@ def update_user_email(request):
 		username = request.POST.get('username', '')
 		domain = request.POST.get('domain', '')
 		password = request.POST.get('password', '')
-		active = request.POST.get('active', False)
 		
 		if (len(username) == 0) or (len(domain) == 0) or (len(password) == 0):
 			return edit_user_email(request, u'Anda harus mengisi semua bidang')
+
 		dom = MailDomain.objects.get(pk=domain)
 		usermail = MailUser.objects.get(id=idmail)
 		usermail.username = username
 		usermail.domain = dom
 		usermail.password= password
-		usermail.active = active
 		usermail.save()
 		return HttpResponseRedirect('/dashboard-cust/user-email')
 	else:
@@ -112,11 +114,8 @@ def add_user_email(request, error = None, berhasil = None, success = False):
 
 	if not success:
 		username = request.POST.get('username', '')
-		domain = request.POST.get('domain', domain)
 		password = request.POST.get('password', '')
-		quota = request.POST.get('quota', quota)
-		active = request.POST.get('active', '')
-	
+
 	return render_to_response('userdash_add_user_email.html',
 		{
 		'success': success,
@@ -126,11 +125,18 @@ def add_user_email(request, error = None, berhasil = None, success = False):
 		'domain': domain,
 		'password': password,
 		'quota': quota,
-		'active': active,
 		'user_balance':get_balance(request)
 		}, RequestContext(request))
 
+def generate_code():
+	result = ''
+	for i in range(0, 10):
+		result += random.choice('0123456789')
+	
+	return result
+
 @login_required()
+@require_POST
 def create_user_email(request):
 	user = request.user
 
@@ -149,24 +155,39 @@ def create_user_email(request):
 		domain = request.POST.get('domain', '')
 		password = request.POST.get('password', '')
 		quota = request.POST.get('quota', '')
-		active = request.POST.get('active', False)
 		
 		if (len(username) == 0) or (len(domain) == 0) or (len(password) == 0) or (len(quota) == 0):
 			return add_user_email(request, u'Anda harus mengisi semua bidang')
+
+		try:
+			user_identic = MailUser.objects.select_related('domain').get(username=username, domain__id=domain)
+		except:
+			user_identic = None
+
+		if user_identic is not None:
+			return add_user_email(request, u'username tersebut sudah ada')
 
 		balance = get_balance(request)
 		price = MailQuota.objects.get(pk=quota)
 
 		if balance.balance < price.price:
-			return add_user_email(request, u'Maaf deposit anda tidak mencukupi')
-
+			return add_user_email(request, error=u'Maaf deposit anda tidak mencukupi')
+		parts = ('CM', user.pk, generate_code())
+		no_invoice = "-".join(str(s) for s in parts if s is not None)
 		balance.balance -= price.price
 		balance.save()
 
 		dom = MailDomain.objects.get(pk=domain)
 		qta = MailQuota.objects.get(pk=quota)
-		usermail = MailUser(username=username, domain=dom, password=password, quota=qta, active=active)
+		parts = (username, dom, qta)
+		create_email = "-".join(str(s) for s in parts if s is not None)
+		waktu = datetime.now() + timedelta(days=30)
+		usermail = MailUser(username=username, domain=dom, password=password, quota=qta, date_expired=waktu)
 		usermail.save()
+
+		cash_balance = balance.balance
+		cashbook = CashBook(user_id=user.pk, code='OUT', invoice=no_invoice, item=create_email, keluar=price.price, balance=cash_balance)
+		cashbook.save()
 		return HttpResponseRedirect('/dashboard-cust/user-email')
 	else:
 		return HttpResponseRedirect('/dashboard-cust/add-user-email')
@@ -207,14 +228,6 @@ def kelola_pembayaran(request):
 
 	return render_to_response('userdash_kelola_pembayaran.html', {'user_balance':get_balance(request)}, RequestContext(request))
 
-def generate_code():
-	result = ''
-	for i in range(0, 10):
-		result += random.choice('0123456789')
-	
-	return result
-
-
 @login_required()
 @require_POST
 @csrf_exempt
@@ -228,7 +241,7 @@ def deposit_paypal(request):
 	paypal_dict = {
 		"business": settings.PAYPAL_RECEIVER_EMAIL,
 		"amount": deposit,
-		"item_name": "BSM Deposit",
+		"item_name": "Paypal Deposit",
 		"item_number": user.id,
 		"invoice": no_invoice,
 		"notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),

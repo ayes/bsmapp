@@ -62,7 +62,9 @@ class MailUser(models.Model):
 	domain = models.ForeignKey(MailDomain, verbose_name = 'Domain')
 	password = models.CharField('Password', max_length = 32, help_text = 'Used to connect through POP, IMAP and SMTP')
 	quota = models.ForeignKey(MailQuota, verbose_name = 'Mailbox size')
- 	active = models.BooleanField('Access', help_text = 'Disabling the user’s access does not destroy his mailbox')
+ 	active = models.BooleanField('Access', default=True, help_text = 'Disabling the user’s access does not destroy his mailbox')
+ 	date_begin = models.DateTimeField(auto_now_add=True)
+ 	date_expired = models.DateTimeField('Date Expired')
 
 	class Meta:
 		db_table = 'users'
