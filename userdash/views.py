@@ -192,6 +192,8 @@ def create_user_email(request):
 	else:
 		return HttpResponseRedirect('/dashboard-cust/add-user-email')
 
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+
 @login_required()
 @csrf_exempt
 def cash_book(request):
@@ -203,8 +205,6 @@ def cash_book(request):
 		cash_book = {}
 
 	return render_to_response('userdash_cash_book.html', {'user_balance':get_balance(request), 'cash_book':cash_book}, RequestContext(request))
-
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 @login_required()
 def customer_profile(request, error = None, berhasil = None):
