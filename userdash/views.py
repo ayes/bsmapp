@@ -180,7 +180,7 @@ def kelola_pembayaran(request):
 
 def generate_code():
 	result = ''
-	for i in range(0, 4):
+	for i in range(0, 10):
 		result += random.choice('0123456789')
 	
 	return result
@@ -191,6 +191,7 @@ def generate_code():
 @csrf_exempt
 def deposit_paypal(request):
 	user = request.user
+	no_invoice = generate_code()
 
 	if request.method == 'POST':
 		deposit = request.POST.get('deposit', '')
@@ -200,12 +201,12 @@ def deposit_paypal(request):
 		"amount": deposit,
 		"item_name": "BSM Deposit",
 		"item_number": user.id,
-		"invoice": generate_code(),
+		"invoice": no_invoice,
 		"notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
 		"return_url": "http://bsmsite.com/dashboard-cust/kelola-pembayaran/",
 		"cancel_return": "http://bsmsite.com/your-cancel-location/",
 	}
 
 	form = PayPalPaymentsForm(initial=paypal_dict)
-	context = {'form': form, 'depo':deposit, 'user_balance':get_balance(request)}
+	context = {'form': form, 'depo':deposit, 'user_balance':get_balance(request), 'no_invoice':no_invoice}
 	return render_to_response("userdash_paypal.html", context)
