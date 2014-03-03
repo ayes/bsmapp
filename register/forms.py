@@ -10,14 +10,14 @@ class RegistrationForm(UserCreationForm):
 		super(RegistrationForm, self).__init__(*args, **kwargs)
 		self.fields['username'].help_text = None
 		self.fields['password2'].help_text = None
-		self.fields['first_name'].required = True
-		self.fields['last_name'].required = True
-		self.fields['email'].required = True
+		self.fields['first_name'].help_text = None
+		self.fields['last_name'].help_text = None
+		self.fields['email'].help_text = None
 
-	def clean_email(self):
-		if User.objects.filter(email__iexact=self.cleaned_data['email']):
-			raise forms.ValidationError(_("Alamat email ini sudah digunakan."))
-		return self.cleaned_data['email']
+	#def clean_email(self):
+	#	if User.objects.filter(email__iexact=self.cleaned_data['email']):
+	#		raise forms.ValidationError(_("Alamat email ini sudah digunakan."))
+	#	return self.cleaned_data['email']
 	
 	class Meta:
 		model = User
