@@ -8,7 +8,7 @@
 				<tr>
 					<th>Nama Domain</th>
 					<th>Keterangan</th>
-					<th>Aksi</th>
+					<th width="1%">Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -16,7 +16,7 @@
 					<tr>
 						<td>{{ dom.domain }}</td>
 						<td>{{ dom.notes }}</td>
-						<td>
+						<td nowrap="nowrap">
 							<a href="/dashboard-cust/edit-user-email/9"><span class="label label-primary">Ganti</span></a>
 							<a href="/dashboard-cust/check-domain-dns/{{ dom.id }}"><span class="label label-primary">Cek&nbsp;DNS</span></a>
 						</td>
