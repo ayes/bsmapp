@@ -1,0 +1,39 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="span12"><h2>Buku Kas</h2></div>
+	</div>
+
+	<hr />
+
+	<section id="tables">
+		<table class="table table-bordered table-striped table-highlight">
+			<thead>
+				<tr>
+					<th>Code</th>
+					<th>No. Invoice</th>
+					<th>Tanggal</th>
+					<th>Item</th>
+					<th>Masuk</th>
+					<th>Keluar</th>
+					<th>Balance</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				{% for usr in cash_book %}
+					<tr>
+						<td>{{ usr.code }}</td>
+						<td>{{ usr.invoice }}</td>
+						<td>{{ usr.tanggal }}</td>
+						<td>{{ usr.item }}</td>
+						<td>{{ usr.masuk }}</td>
+						<td>{{ usr.keluar }}</td>
+						<td>{{ usr.balance }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

@@ -130,6 +130,7 @@ def add_user_email(request, error = None, berhasil = None, success = False):
 		'user_balance':get_balance(request)
 		}, RequestContext(request))
 
+@login_required()
 def create_user_email(request):
 	user = request.user
 
@@ -169,6 +170,17 @@ def create_user_email(request):
 		return HttpResponseRedirect('/dashboard-cust/user-email')
 	else:
 		return HttpResponseRedirect('/dashboard-cust/add-user-email')
+
+@login_required()
+def cash_book(request):
+	user = request.user
+
+	try:
+		cash_book =  CashBook.objects.filter(user_id=user.pk)
+	except:
+		cash_book = {}
+
+	return render_to_response('userdash_cash_book.html', {'user_balance':get_balance(request), 'cash_book':cash_book}, RequestContext(request))
 
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
