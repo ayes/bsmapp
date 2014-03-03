@@ -193,6 +193,7 @@ def create_user_email(request):
 		return HttpResponseRedirect('/dashboard-cust/add-user-email')
 
 @login_required()
+@csrf_exempt
 def cash_book(request):
 	user = request.user
 

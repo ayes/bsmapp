@@ -37,7 +37,7 @@ def show_me_the_money(sender, **kwargs):
 
 		cash_balance = balance.balance
 		get_user = User.objects.get(pk=ipn_obj.item_number)
-		cashbook = CashBook(user_id=get_user.id, code='IN', invoice=invoice, item=ipn_obj.item_name, masuk=ipn_obj.mc_gross, balance=cash_balance)
+		cashbook = CashBook(user_id=get_user.id, code='IN', invoice=ipn_obj.invoice, item=ipn_obj.item_name, masuk=ipn_obj.mc_gross, balance=cash_balance)
 		cashbook.save()
 
 payment_was_successful.connect(show_me_the_money)
