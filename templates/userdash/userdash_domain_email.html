@@ -1,30 +1,28 @@
 {% extends "userdash_bbase.html" %}
 
 {% block content %}
-
-<section id="tables">
-					<h2>Nama Domain Email Anda</h2>
-					
-					
-					
-					<table class="table table-bordered table-striped table-highlight">
-						        <thead>
-						          <tr>
-						            <th>Nama Domain</th>
-						            <th>Keterangan</th>
-						          </tr>
-						        </thead>
-						        <tbody>
-						        	{% for dom in domain %}
-						          <tr>
-						          	
-						            <td>{{ dom.domain }}</td>
-						            <td>{{ dom.notes }}</td>
-
-						          </tr>
-						          {% endfor %}
-						        </tbody>
-						      </table>
-
-
+	<section id="tables">
+		<h2>Nama Domain Email Anda</h2>
+		<table class="table table-bordered table-striped table-highlight">
+			<thead>
+				<tr>
+					<th>Nama Domain</th>
+					<th>Keterangan</th>
+					<th>Aksi</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for dom in domain %}
+					<tr>
+						<td>{{ dom.domain }}</td>
+						<td>{{ dom.notes }}</td>
+						<td>
+							<a href="/dashboard-cust/edit-user-email/9"><span class="label label-primary">Ganti</span></a>
+							<a href="/dashboard-cust/check-domain-dns/{{ dom.id }}"><span class="label label-primary">Cek&nbsp;DNS</span></a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
 {% endblock %}
