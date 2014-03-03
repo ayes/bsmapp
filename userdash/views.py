@@ -246,7 +246,7 @@ def deposit_paypal(request):
 		"item_number": user.id,
 		"invoice": no_invoice,
 		"notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
-		"return_url": "http://bsmsite.com/dashboard-cust/kelola-pembayaran/",
+		"return_url": "http://bsmsite.com/dashboard-cust/cash-book/",
 		"cancel_return": "http://bsmsite.com/your-cancel-location/",
 	}
 
