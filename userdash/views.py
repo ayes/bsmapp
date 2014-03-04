@@ -84,25 +84,12 @@ def update_user_email(request):
 
 	if request.method == 'POST':
 		idmail = request.POST.get('idmail', '')
-		username = request.POST.get('username', '')
-		domain = request.POST.get('domain', '')
 		password = request.POST.get('password', '')
 		
-		if (len(username) == 0) or (len(domain) == 0) or (len(password) == 0):
-			return edit_user_email(request, u'Anda harus mengisi semua bidang')
+		if len(password) == 0:
+			return edit_user_email(request, u'Anda harus mengisi password')
 
-		try:
-			user_identic = MailUser.objects.select_related('domain').get(~Q(id=idmail), username=username, domain__id=domain)
-		except:
-			user_identic = None
-
-		if user_identic is not None:
-			return edit_user_email(request, u'username tersebut sudah ada', idmail)
-
-		dom = MailDomain.objects.get(pk=domain)
 		usermail = MailUser.objects.get(id=idmail)
-		usermail.username = username
-		usermail.domain = dom
 		usermail.password= password
 		usermail.save()
 		return HttpResponseRedirect('/dashboard-cust/user-email')
