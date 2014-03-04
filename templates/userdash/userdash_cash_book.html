@@ -32,6 +32,10 @@
 						<td>{{ usr.keluar }}</td>
 						<td>{{ usr.balance }}</td>
 					</tr>
+				{% empty %}
+					<tr>
+						<td colspan="7">No records exist yet</td>
+					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
