@@ -45,6 +45,10 @@
 							<a href="/dashboard-cust/edit-user-email/{{ usr.id }}"><span class="label label-primary">Ganti</span></a>
 						</td>
 					</tr>
+					{% empty %}
+					<tr>
+						<td colspan="9">Belum ada data yang tersedia</td>
+					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
