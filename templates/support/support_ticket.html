@@ -22,7 +22,7 @@
 			<tbody>
 				{% for usr in support %}
 					<tr>
-						<td>#{{ usr.id }} {{ usr.subject }}</td>
+						<td><a href="/dashboard-cust/view-support-ticket/{{ usr.id }}">#{{ usr.id }} {{ usr.subject }}</a></td>
 						<td>{{ usr.post_date }}</td>
 					</tr>
 					{% empty %}

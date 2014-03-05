@@ -1,0 +1,22 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="span12">
+			<h2>Tiket Anda</h2>
+			<span>#{{ support.id }} {{ support.subject }}</span>
+		</div>
+
+	</div>
+
+	<hr />
+
+	<div class="row">
+			<div class="span12">	
+				<ul>
+					<li>
+						<p>{{ support.body }}</p>		
+					</li>
+				</ul>
+			</div>
+{% endblock %}
