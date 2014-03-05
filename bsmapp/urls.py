@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'', include('blog.urls')),
     url(r'', include('register.urls')),
     url(r'', include('userdash.urls')),
+    url(r'', include('support.urls')),
 )

@@ -14,12 +14,11 @@ from django.views.decorators.http import require_POST
 from datetime import datetime, timedelta
 
 def get_balance(request):
-	user = request.user
-	return UserBalance.objects.get(user_id=user.pk)
+	return UserBalance.objects.get(user=request.user)
 
 @login_required()
 def dashboard_cust(request):
-	return render_to_response('userdash_dashboard_user.html', {'user_balance':get_balance(request)}, RequestContext(request))
+	return render_to_response('userdash_dashboard_user.html', { 'user_balance':get_balance(request) }, RequestContext(request))
 
 @login_required()
 def logout(request):
@@ -28,10 +27,8 @@ def logout(request):
 
 @login_required()
 def domain_email(request):
-	user = request.user
-
 	try:
-		domain = MailDomain.objects.filter(user_id=user.pk)
+		domain = MailDomain.objects.filter(user=request.user)
 	except:
 		domain = {}
 
@@ -39,10 +36,8 @@ def domain_email(request):
 
 @login_required()
 def user_email(request):
-	user = request.user
-
 	try:
-		usermail = MailUser.objects.select_related('domain').filter(domain__user_id=user.pk)
+		usermail = MailUser.objects.select_related('domain').filter(domain__user=request.user)
 	except:
 		usermail = {}
 
@@ -50,15 +45,13 @@ def user_email(request):
 
 @login_required()
 def edit_user_email(request, error = None, post_id = None):
-	user = request.user
-
 	try:
-		usermail = MailUser.objects.select_related('domain').get(id=post_id, domain__user_id=user.pk)
+		usermail = MailUser.objects.select_related('domain').get(id=post_id, domain__user=request.user)
 	except:
 		raise Http404
 
 	try:
-		domain =  MailDomain.objects.filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user=request_user)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
@@ -70,15 +63,11 @@ def edit_user_email(request, error = None, post_id = None):
 			'domain':domain
 		}, RequestContext(request))
 
-from django.db.models import Q
-
 @login_required()
 @require_POST
 def update_user_email(request):
-	user = request.user
-
 	try:
-		domain =  MailDomain.objects.filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user=request.user)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
@@ -98,10 +87,8 @@ def update_user_email(request):
 
 @login_required()
 def add_user_email(request, error = None, berhasil = None, success = False):
-	user = request.user
-
 	try:
-		domain =  MailDomain.objects.filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user=request.user)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
@@ -136,10 +123,8 @@ def generate_code():
 @login_required()
 @require_POST
 def create_user_email(request):
-	user = request.user
-
 	try:
-		domain =  MailDomain.objects.filter(user_id=user.pk)
+		domain =  MailDomain.objects.filter(user=request.user)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
@@ -170,7 +155,7 @@ def create_user_email(request):
 
 		if balance.balance < price.price:
 			return add_user_email(request, error=u'Maaf deposit anda tidak mencukupi')
-		parts = ('CM', user.pk, generate_code())
+		parts = ('CM', request.user.pk, generate_code())
 		no_invoice = "-".join(str(s) for s in parts if s is not None)
 		balance.balance -= price.price
 		balance.save()
@@ -179,12 +164,12 @@ def create_user_email(request):
 		qta = MailQuota.objects.get(pk=quota)
 		parts = (username, dom, qta)
 		create_email = "-".join(str(s) for s in parts if s is not None)
-		waktu = datetime.now() + timedelta(days=30)
+		waktu = datetime.now() + timedelta(days=365)
 		usermail = MailUser(username=username, domain=dom, password=password, quota=qta, date_expired=waktu)
 		usermail.save()
 
 		cash_balance = balance.balance
-		cashbook = CashBook(user_id=user.pk, code='OUT', invoice=no_invoice, item=create_email, keluar=price.price, balance=cash_balance)
+		cashbook = CashBook(user=request.user, code='OUT', invoice=no_invoice, item=create_email, keluar=price.price, balance=cash_balance)
 		cashbook.save()
 		return HttpResponseRedirect('/dashboard-cust/user-email')
 	else:
@@ -195,10 +180,8 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 @login_required()
 @csrf_exempt
 def cash_book(request):
-	user = request.user
-
 	try:
-		cash_book =  CashBook.objects.filter(user_id=user.pk).order_by('-id')
+		cash_book =  CashBook.objects.filter(user=request.user).order_by('-id')
 	except:
 		cash_book = {}
 
@@ -223,16 +206,15 @@ def customer_profile(request, error = None, berhasil = None):
 		
 @login_required()
 @csrf_exempt
-def kelola_pembayaran(request):
+def management_payment(request):
 
-	return render_to_response('userdash_kelola_pembayaran.html', {'user_balance':get_balance(request)}, RequestContext(request))
+	return render_to_response('userdash_management_payment.html', {'user_balance':get_balance(request)}, RequestContext(request))
 
 @login_required()
 @require_POST
 @csrf_exempt
 def deposit_paypal(request):
-	user = request.user
-	parts = ('PP', user.pk, generate_code())
+	parts = ('PP', request.user.id, generate_code())
 	no_invoice = "-".join(str(s) for s in parts if s is not None)
 
 	if request.method == 'POST':
@@ -242,11 +224,11 @@ def deposit_paypal(request):
 		"business": settings.PAYPAL_RECEIVER_EMAIL,
 		"amount": deposit,
 		"item_name": "Paypal Deposit",
-		"item_number": user.id,
+		"item_number": request.user.id,
 		"invoice": no_invoice,
-		"notify_url": "http://bsmsite.com" + reverse('paypal-ipn'),
-		"return_url": "http://bsmsite.com/dashboard-cust/cash-book/",
-		"cancel_return": "http://bsmsite.com/your-cancel-location/",
+		"notify_url": "http://"+ settings.DOMAIN_MY_SITE + reverse('paypal-ipn'),
+		"return_url": "http://"+ settings.DOMAIN_MY_SITE +"/dashboard-cust/cash-book/",
+		"cancel_return": "http://"+ settings.DOMAIN_MY_SITE +"/your-cancel-location/",
 	}
 
 	form = PayPalPaymentsForm(initial=paypal_dict)

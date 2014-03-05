@@ -1,0 +1,36 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="span4"><h2>Hubungi Pusat Bantuan</h2></div>
+		<div class="span8 text-right">
+			<a href="/dashboard-cust/add-support-ticket" class="btn btn-large btn-secondary">Buat Tiket Baru</a>
+		</div>
+	</div>
+
+	<hr />
+
+	<section id="tables">
+		<table class="table table-bordered table-striped table-highlight">
+			<thead>
+				<tr>
+					<th>Tiket</th>
+					<th>Tanggal Posting</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				{% for usr in support %}
+					<tr>
+						<td>#{{ usr.id }} {{ usr.subject }}</td>
+						<td>{{ usr.post_date }}</td>
+					</tr>
+					{% empty %}
+					<tr>
+						<td colspan="2">Belum ada data yang tersedia</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}
