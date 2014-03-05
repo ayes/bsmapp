@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from userdash.views import get_balance
 from django.template import RequestContext
 from support.forms import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 @login_required()
 def support(request):
@@ -21,7 +21,6 @@ def add_support_ticket(request):
 	except:
 		support = {}
 
-	user = User.objects.get(pk=request.user.pk)
 	if request.method == 'GET':
 		form = SupportForm()
 		return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
@@ -31,3 +30,5 @@ def add_support_ticket(request):
 			instance = TicketSupport(user=request.user, type_support=TypeSupport.objects.get(pk=request.POST.get('type_support')), subject=request.POST.get('subject'), body=request.POST.get('body'))
 			instance.save()
 			return HttpResponseRedirect('/dashboar-cust/support')
+		else:
+			return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
