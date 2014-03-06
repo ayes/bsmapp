@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse
 import random
 from django.views.decorators.http import require_POST
 from datetime import datetime, timedelta
+import dns.resolver
 
 def get_balance(request):
 	return UserBalance.objects.get(user=request.user)
@@ -34,19 +35,31 @@ def domain_email(request):
 
 	return render_to_response('userdash_domain_email.html', {'user_balance':get_balance(request), 'domain':domain}, RequestContext(request))
 
+from django.core.cache import cache
+
 @login_required()
-def add_domain_email(request):
+def add_domain_email(request, error=None):
 	if request.method == 'GET':
+		cache.clear()
 		form = MailDomainForm()
 		return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
 	else:
 		form = MailDomainForm(request.POST)
 		if form.is_valid():
+			try:
+				a = dns.resolver.query(request.POST.get('domain'), 'MX')
+			except:
+				raise Http404
+			
+			b = a[0]
+			c = str(b)
+			if c != '10 srv.bsmsite.com.':
+				raise Http404
 			#instance = TicketSupport(user=request.user, type_support=TypeSupport.objects.get(pk=request.POST.get('type_support')), subject=request.POST.get('subject'), body=request.POST.get('body'))
 			#instance.save()
 			return HttpResponseRedirect('/dashboard-cust/domain-email')
 		else:
-			return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
+			return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
 
 @login_required()
 def user_email(request):
