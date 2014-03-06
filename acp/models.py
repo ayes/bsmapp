@@ -26,8 +26,8 @@ class Orderable(models.Model):
 
 class MailDomain(Orderable):
 	user = models.ForeignKey(User)
-	domain = models.CharField(u'Domain name', max_length = 64, help_text = 'Domain name to serve (example: bsmsite.com)', unique = True)
-	notes = models.CharField(u'Notes', max_length = 1024, help_text = 'Anything about this domain')
+	domain = models.CharField(u'Nama Domain', max_length = 64, help_text = 'contoh: bsmsite.com', unique = True)
+	notes = models.CharField(u'Keterangan', max_length = 1024)
 
 	def __unicode__(self):
 		return self.domain

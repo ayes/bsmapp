@@ -35,6 +35,20 @@ def domain_email(request):
 	return render_to_response('userdash_domain_email.html', {'user_balance':get_balance(request), 'domain':domain}, RequestContext(request))
 
 @login_required()
+def add_domain_email(request):
+	if request.method == 'GET':
+		form = MailDomainForm()
+		return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
+	else:
+		form = MailDomainForm(request.POST)
+		if form.is_valid():
+			#instance = TicketSupport(user=request.user, type_support=TypeSupport.objects.get(pk=request.POST.get('type_support')), subject=request.POST.get('subject'), body=request.POST.get('body'))
+			#instance.save()
+			return HttpResponseRedirect('/dashboard-cust/domain-email')
+		else:
+			return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
+
+@login_required()
 def user_email(request):
 	try:
 		usermail = MailUser.objects.select_related('domain').filter(domain__user=request.user)

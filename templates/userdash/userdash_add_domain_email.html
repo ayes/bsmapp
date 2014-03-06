@@ -1,0 +1,16 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="span4"><h2>Menghubungkan Domain Anda</h2></div>
+	</div>
+
+	<hr />
+	<form action="/dashboard-cust/add-domain-email" method="post">
+	{{ form.as_p}}
+	{% csrf_token %}
+		<div class="form-actions">
+		<button type="submit" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Hubungkan Domain</button>
+		</div>
+	</form>
+{% endblock %}
