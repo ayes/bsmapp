@@ -61,8 +61,8 @@ def add_domain_email(request):
 				return HttpResponseRedirect('/dashboard-cust/error-domain-email')
 
 			try:
-				exchanger = address[0]
-				if not str(exchanger).endswidth('srv.bsmsite.com.'):
+				exchanger = str(address[0])
+				if not exchanger.endswidth('bsmsite.com.'): # NOTE: srv.bsmsite.com and mail.bsmsite.com are both valid
 					return HttpResponseRedirect('/dashboard-cust/error-domain-email')
 			except:
 				return HttpResponseRedirect('/dashboard-cust/error-domain-email')
