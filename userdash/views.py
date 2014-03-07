@@ -19,7 +19,7 @@ def get_balance(request):
 
 @login_required()
 def dashboard_cust(request):
-	return render_to_response('userdash_dashboard_user.html', { 'user_balance':get_balance(request) }, RequestContext(request))
+	return render_to_response('userdash_dashboard_user.html', { 'user_balance':get_balance(request), 'menu_home':'active' }, RequestContext(request))
 
 @login_required()
 def logout(request):
@@ -33,13 +33,13 @@ def domain_email(request):
 	except:
 		domain = {}
 
-	return render_to_response('userdash_domain_email.html', {'user_balance':get_balance(request), 'domain':domain}, RequestContext(request))
+	return render_to_response('userdash_domain_email.html', {'user_balance':get_balance(request), 'domain':domain, 'menu_email':'active'}, RequestContext(request))
 
 @login_required()
 def add_domain_email(request):
 	if request.method == 'GET':
 		form = MailDomainForm()
-		return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
+		return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'menu_email':'active'}, RequestContext(request))
 	else:
 		form = MailDomainForm(request.POST)
 		if form.is_valid():
@@ -71,11 +71,11 @@ def add_domain_email(request):
 			instance.save()
 			return HttpResponseRedirect('/dashboard-cust/domain-email')
 		else:
-			return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
+			return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'menu_email':'active'}, RequestContext(request))
 
 @login_required()
 def error_domain_email(request):
-		return render_to_response('userdash_error_domain_email.html', {'user_balance':get_balance(request)}, RequestContext(request))
+		return render_to_response('userdash_error_domain_email.html', {'user_balance':get_balance(request), 'menu_email':'active'}, RequestContext(request))
 
 @login_required()
 def user_email(request):
@@ -84,7 +84,7 @@ def user_email(request):
 	except:
 		usermail = {}
 
-	return render_to_response('userdash_user_email.html', {'user_balance':get_balance(request), 'usermail':usermail}, RequestContext(request))
+	return render_to_response('userdash_user_email.html', {'user_balance':get_balance(request), 'usermail':usermail, 'menu_email':'active'}, RequestContext(request))
 
 @login_required()
 def edit_user_email(request, error = None, post_id = None):
@@ -103,7 +103,8 @@ def edit_user_email(request, error = None, post_id = None):
 			'user_balance':get_balance(request),
 			'usermail':usermail,
 			'error':error,
-			'domain':domain
+			'domain':domain,
+			'menu_email':'active'
 		}, RequestContext(request))
 
 @login_required()
@@ -153,7 +154,8 @@ def add_user_email(request, error = None, berhasil = None, success = False):
 		'domain': domain,
 		'password': password,
 		'quota': quota,
-		'user_balance':get_balance(request)
+		'user_balance':get_balance(request),
+		'menu_email':'active'
 		}, RequestContext(request))
 
 def generate_code():
@@ -228,13 +230,13 @@ def cash_book(request):
 	except:
 		cash_book = {}
 
-	return render_to_response('userdash_cash_book.html', {'user_balance':get_balance(request), 'cash_book':cash_book}, RequestContext(request))
+	return render_to_response('userdash_cash_book.html', {'user_balance':get_balance(request), 'cash_book':cash_book, 'menu_report':'active'}, RequestContext(request))
 
 @login_required()
 def customer_profile(request, error = None, berhasil = None):
 	if request.method == 'GET':
 		form = UserForm(instance=request.user)
-		return render_to_response('userdash_edit_customer_profile.html', {'form': form, 'error':error, 'user_balance':get_balance(request)}, RequestContext(request))
+		return render_to_response('userdash_edit_customer_profile.html', {'form': form, 'error':error, 'user_balance':get_balance(request), 'menu_setting':'active'}, RequestContext(request))
 	elif request.method == 'POST':
 		first_name = request.POST.get('first_name', '')
 		last_name = request.POST.get('last_name', '')
@@ -250,12 +252,12 @@ def customer_profile(request, error = None, berhasil = None):
 @login_required()
 @csrf_exempt
 def management_payment(request):
-	return render_to_response('userdash_management_payment.html', {'user_balance':get_balance(request)}, RequestContext(request))
+	return render_to_response('userdash_management_payment.html', {'user_balance':get_balance(request), 'menu_payment':'active'}, RequestContext(request))
 
 @login_required()
 @csrf_exempt
 def cancel_deposit_paypal(request):
-		return render_to_response('userdash_cancel_deposit_paypal.html', {'user_balance':get_balance(request)}, RequestContext(request))
+		return render_to_response('userdash_cancel_deposit_paypal.html', {'user_balance':get_balance(request), 'menu_payment':'active'}, RequestContext(request))
 
 @login_required()
 @require_POST
@@ -279,5 +281,5 @@ def deposit_paypal(request):
 	}
 
 	form = PayPalPaymentsForm(initial=paypal_dict)
-	context = {'form': form, 'depo':deposit, 'user_balance':get_balance(request), 'no_invoice':no_invoice}
+	context = {'form': form, 'depo':deposit, 'user_balance':get_balance(request), 'no_invoice':no_invoice, 'menu_payment':'active'}
 	return render_to_response("userdash_paypal.html", context)

@@ -12,14 +12,14 @@ def support(request):
 	except:
 		support = {}
 
-	return render_to_response('support_ticket.html', {'user_balance':get_balance(request), 'support':support}, RequestContext(request))
+	return render_to_response('support_ticket.html', {'user_balance':get_balance(request), 'support':support, 'menu_support':'active'}, RequestContext(request))
 
 @login_required()
 def add_support_ticket(request):
 	if request.method == 'GET':
 		form = SupportForm()
 		form_ask = ReplaySupportForm()
-		return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form, 'form_ask':form_ask}, RequestContext(request))
+		return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form, 'form_ask':form_ask, 'menu_support':'active'}, RequestContext(request))
 	else:
 		form = SupportForm(request.POST)
 		if form.is_valid():
@@ -29,7 +29,7 @@ def add_support_ticket(request):
 			instance_ask.save()
 			return HttpResponseRedirect('/dashboard-cust/support')
 		else:
-			return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
+			return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form, 'menu_support':'active'}, RequestContext(request))
 
 @login_required()
 def view_support_ticket(request, ticket_id):
@@ -45,7 +45,7 @@ def view_support_ticket(request, ticket_id):
 			support = {}
 
 		form = ReplaySupportForm()
-		return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form, 'ticket':ticket}, RequestContext(request))
+		return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form, 'ticket':ticket, 'menu_support':'active'}, RequestContext(request))
 	else:
 		form = ReplaySupportForm(request.POST)
 		if form.is_valid():
@@ -53,4 +53,4 @@ def view_support_ticket(request, ticket_id):
 			instance.save()
 			return HttpResponseRedirect('/dashboard-cust/view-support-ticket/' + request.POST.get('idsupport'))
 		else:
-			return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form}, RequestContext(request))
+			return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form, 'menu_support':'active'}, RequestContext(request))
