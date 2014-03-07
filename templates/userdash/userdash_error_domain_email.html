@@ -1,0 +1,40 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+			<div class="row">
+			
+			<div class="span12">
+				
+				<div class="error-container">
+					
+					<h1>Oops!</h1>
+					
+					<h2>Domain anda tidak terpointing ke MX kami</h2>
+					
+					<div class="error-details">
+						Silahkan pointing domain anda ke MX record kami!
+						
+					</div> <!-- /error-details -->
+					
+					<div class="error-actions">
+						<a href="/dashboard-cust/add-domain-email" class="btn btn-large btn-primary">
+							<i class="fa fa-chevron-left"></i>
+							&nbsp;
+							Kembali ke Domain						
+						</a>
+						
+						<a href="/dashboard-cust/support" class="btn btn-large">
+							<i class="fa fa-ambulance"></i>
+							&nbsp;
+							Hubungi Bantuan						
+						</a>
+						
+					</div> <!-- /error-actions -->
+								
+				</div> <!-- /.error-container -->				
+				
+				
+			</div> <!-- /.span12 -->
+			
+		</div> <!-- /.row -->
+{% endblock %}
