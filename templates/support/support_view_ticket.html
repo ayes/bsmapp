@@ -25,7 +25,7 @@
 	<div class="row">
 			<div class="span12">	
 					{% for i in support %}
-					<p>[.] {% gravatar_for_user i.user 40 g %} {{ i.user }}</p>
+					<p>[.] <img src="{% gravatar_for_user i.user 40 g %}" alt="{{ i.user }}" title="{{ i.user }}" /> {{ i.user }}</p>
 						<p><pre>{{ i.body }}</pre></p>		
 					{% endfor %}
 			</div>
