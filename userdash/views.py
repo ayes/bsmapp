@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 import random
 from django.views.decorators.http import require_POST
 from datetime import datetime, timedelta
-import dns.resolver
+from dns.resolver import Resolver
 
 def get_balance(request):
 	return UserBalance.objects.get(user=request.user)
@@ -44,12 +44,24 @@ def add_domain_email(request):
 		form = MailDomainForm(request.POST)
 		if form.is_valid():
 			try:
-				a = dns.resolver.query(request.POST.get('domain'), 'MX')
+
+				local_resolver = Resolver()
+				name_servers = local_resolver.query(request.POST.get('domain'), 'NS')
+
+				uncached_resolver = Resolver(configure = False)
+				for i in name_servers:
+					try:
+						authentic_address = local_resolver.query(str(i), 'A')
+						resolver.nameservers.append(str(authentic_address[0]))
+					except: # one of the servers was broken?
+						pass
+
+				address = uncached_resolver.query(request.POST.get('domain'), 'MX')
 			except:
 				return HttpResponseRedirect('/dashboard-cust/error-domain-email')
 
 			try:
-				exchanger = a[0]
+				exchanger = address[0]
 				if not str(exchanger).endswidth('srv.bsmsite.com.'):
 					return HttpResponseRedirect('/dashboard-cust/error-domain-email')
 			except:
