@@ -48,9 +48,11 @@ def add_domain_email(request):
 			except:
 				return HttpResponseRedirect('/dashboard-cust/error-domain-email')
 
-			b = a[0]
-			c = str(b)
-			if c != '10 srv.bsmsite.com.':
+			try:
+				exchanger = a[0]
+				if not str(exchanger).endswidth('srv.bsmsite.com.'):
+					return HttpResponseRedirect('/dashboard-cust/error-domain-email')
+			except:
 				return HttpResponseRedirect('/dashboard-cust/error-domain-email')
 
 			instance = MailDomain(user=request.user, domain=request.POST.get('domain'), notes=request.POST.get('notes'))
