@@ -7,16 +7,21 @@
 			<a href="/dashboard-cust/add-domain-email" class="btn btn-large btn-secondary">Hubungkan Domain</a>
 		</div>
 	</div>
-
 	<hr />
 
-	<section id="tables">
+			Mengelola record MX dari domain. Record MX harus menunjuk ke server untuk menerima email untuk domain.<br />
+			Hubungkan domain, MX record anda ke: 
+			<ul>
+				<li>server: mail.bsmsite.com</li>
+				<li>Priority: 10</li>
+			</ul>
+
+		<section id="tables">
 		<table class="table table-bordered table-striped table-highlight">
 			<thead>
 				<tr>
 					<th>Nama Domain</th>
 					<th>Keterangan</th>
-					<th width="1%">Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,13 +29,10 @@
 					<tr>
 						<td>{{ dom.domain }}</td>
 						<td>{{ dom.notes }}</td>
-						<td nowrap="nowrap">
-							<a href="/dashboard-cust/check-domain-dns/{{ dom.id }}"><span class="label label-primary">Cek&nbsp;DNS</span></a>
-						</td>
 					</tr>
 					{% empty %}
 					<tr>
-						<td colspan="3">Belum ada data yang tersedia</td>
+						<td colspan="2">Belum ada data yang tersedia</td>
 					</tr>
 				{% endfor %}
 			</tbody>
