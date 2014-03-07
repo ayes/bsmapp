@@ -94,7 +94,7 @@ def edit_user_email(request, error = None, post_id = None):
 		raise Http404
 
 	try:
-		domain =  MailDomain.objects.filter(user=request_user)
+		domain =  MailDomain.objects.filter(user=request.user)
 	except MailDomain.DoesNotExist:
 		raise Http404
 
