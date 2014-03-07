@@ -22,6 +22,7 @@ def add_support_ticket(request):
 		return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form, 'form_ask':form_ask, 'menu_support':'active'}, RequestContext(request))
 	else:
 		form = SupportForm(request.POST)
+		form_ask = ReplaySupportForm(request.POST)
 		if form.is_valid():
 			instance = TicketSupport(user=request.user, type_support=TypeSupport.objects.get(pk=request.POST.get('type_support')), subject=request.POST.get('subject'))
 			instance.save()
@@ -29,7 +30,7 @@ def add_support_ticket(request):
 			instance_ask.save()
 			return HttpResponseRedirect('/dashboard-cust/support')
 		else:
-			return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form, 'menu_support':'active'}, RequestContext(request))
+			return render_to_response('support_add_ticket.html', {'user_balance':get_balance(request), 'form':form, 'form_ask':form_ask, 'menu_support':'active'}, RequestContext(request))
 
 @login_required()
 def view_support_ticket(request, ticket_id):
