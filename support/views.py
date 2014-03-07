@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, Http404
 @login_required()
 def support(request):
 	try:
-		support = ReplaySupport.objects.select_related('ticket').filter(ticket__user=request.user).order_by('-ticket__id')
+		support = TicketSupport.objects.filter(user=request.user).order_by('-pk')
 	except:
 		support = {}
 
