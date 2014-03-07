@@ -35,12 +35,9 @@ def domain_email(request):
 
 	return render_to_response('userdash_domain_email.html', {'user_balance':get_balance(request), 'domain':domain}, RequestContext(request))
 
-from django.core.cache import cache
-
 @login_required()
 def add_domain_email(request):
 	if request.method == 'GET':
-		cache.clear()
 		form = MailDomainForm()
 		return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form}, RequestContext(request))
 	else:
@@ -239,8 +236,12 @@ def customer_profile(request, error = None, berhasil = None):
 @login_required()
 @csrf_exempt
 def management_payment(request):
-
 	return render_to_response('userdash_management_payment.html', {'user_balance':get_balance(request)}, RequestContext(request))
+
+@login_required()
+@csrf_exempt
+def cancel_deposit_paypal(request):
+		return render_to_response('userdash_cancel_deposit_paypal.html', {'user_balance':get_balance(request)}, RequestContext(request))
 
 @login_required()
 @require_POST
@@ -260,7 +261,7 @@ def deposit_paypal(request):
 		"invoice": no_invoice,
 		"notify_url": "http://"+ settings.DOMAIN_MY_SITE + reverse('paypal-ipn'),
 		"return_url": "http://"+ settings.DOMAIN_MY_SITE +"/dashboard-cust/cash-book/",
-		"cancel_return": "http://"+ settings.DOMAIN_MY_SITE +"/your-cancel-location/",
+		"cancel_return": "http://"+ settings.DOMAIN_MY_SITE +"/dashboard-cust/cancel-deposit-paypal",
 	}
 
 	form = PayPalPaymentsForm(initial=paypal_dict)

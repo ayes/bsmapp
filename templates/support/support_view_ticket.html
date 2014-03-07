@@ -4,19 +4,27 @@
 	<div class="row">
 		<div class="span12">
 			<h2>Tiket Anda</h2>
-			<span>#{{ support.id }} {{ support.subject }}</span>
+			<span>#{{ ticket.id }} {{ ticket.subject }}</span>
 		</div>
-
 	</div>
-
 	<hr />
-
+	<div class="row">
+		<div class="span12">
+			<form action="/dashboard-cust/view-support-ticket/{{ ticket.id }}" method="post">
+			<div class="form-actions">
+				<input type="hidden" name="idsupport" value="{{ ticket.id }}">
+			{{ form.as_p}}
+			{% csrf_token %}
+			<button type="submit" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Balas</button>
+			</div>
+			</form>
+		</div>
+	</div>
 	<div class="row">
 			<div class="span12">	
-				<ul>
-					<li>
-						<p><pre>{{ support.body }}</pre></p>		
-					</li>
-				</ul>
+					{% for i in support %}
+					<p>[.] {{ i.user }}</p>
+						<p><pre>{{ i.body }}</pre></p>		
+					{% endfor %}
 			</div>
 {% endblock %}

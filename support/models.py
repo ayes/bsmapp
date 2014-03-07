@@ -15,8 +15,6 @@ class TicketSupport(models.Model):
 	user = models.ForeignKey(User)
 	type_support = models.ForeignKey(TypeSupport, verbose_name = 'Jenis Bantuan')
 	subject = models.CharField(u'Judul', max_length = 100)
-	body = models.TextField('Pertanyaan', max_length=1024)
-	post_date = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
 		return self.subject
@@ -25,8 +23,8 @@ class TicketSupport(models.Model):
 		db_table = 'support_ticket'
 
 class ReplaySupport(models.Model):
-	user = models.ForeignKey(User)
 	ticket = models.ForeignKey(TicketSupport, verbose_name = 'Ticket')
+	user = models.ForeignKey(User)
 	body = models.TextField('Komentar', max_length=1024)
 	post_date = models.DateTimeField(auto_now_add=True)
 

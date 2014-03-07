@@ -16,18 +16,20 @@
 				<tr>
 					<th>Tiket</th>
 					<th>Tanggal Posting</th>
+					<th>Terakhir Dibalas Oleh</th>
 				</tr>
 			</thead>
 			
 			<tbody>
 				{% for usr in support %}
 					<tr>
-						<td><a href="/dashboard-cust/view-support-ticket/{{ usr.id }}">#{{ usr.id }} {{ usr.subject }}</a></td>
+						<td><a href="/dashboard-cust/view-support-ticket/{{ usr.ticket.id }}">#{{ usr.ticket.id }} {{ usr.ticket.subject }}</a></td>
 						<td>{{ usr.post_date }}</td>
+						<td>{{ usr.user }}</td>
 					</tr>
 					{% empty %}
 					<tr>
-						<td colspan="2">Belum ada data yang tersedia</td>
+						<td colspan="3">Belum ada data yang tersedia</td>
 					</tr>
 				{% endfor %}
 			</tbody>
