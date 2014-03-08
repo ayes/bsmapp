@@ -1,0 +1,21 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="span4"><h2>Menghapus Domain Anda</h2></div>
+	</div>
+
+	<hr />
+	Nama Domain : {{ domain.domain }}<br />
+	Keterangan : {{ domain.notes }}
+	<p style="border:0; color:red;">Peringatan! menghapus domain juga akan menghapus seluruh user email dengan domain {{ domain.domain }}
+		<br />Benar ingin menghapus?</p>
+	<form action="/dashboard-cust/delete-confirm-domain-email" method="post">
+		<input type="hidden" name="domain_id" value="{{ domain.id }}">
+	{% csrf_token %}
+		<div class="form-actions">
+		<button type="submit" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Hapus Domain</button>
+		<a href="/dashboard-cust/domain-email" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Batal</a>
+		</div>
+	</form>
+{% endblock %}

@@ -19,3 +19,8 @@ class MailDomainForm(forms.ModelForm):
 	class Meta:
 		model = MailDomain
 		fields = ('domain', 'notes')
+
+class DomainNotesEditForm(forms.ModelForm):
+	class Meta:
+		model = MailDomain
+		fields = ('notes',)

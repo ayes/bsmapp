@@ -74,6 +74,46 @@ def add_domain_email(request):
 			return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'menu_email':'active'}, RequestContext(request))
 
 @login_required()
+def delete_domain_email(request, domain_id):
+	try:
+		domain = MailDomain.objects.get(id=domain_id, user=request.user)
+	except:
+		raise Http404
+	if request.method == 'GET':
+		form = DomainNotesEditForm(instance=domain)
+		return render_to_response('userdash_delete_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'domain':domain, 'menu_email':'active'}, RequestContext(request))
+	else:
+		raise Http404
+
+@login_required()
+@require_POST
+def delete_confirm_domain_email(request):
+	try:
+		domain = MailDomain.objects.get(id=request.POST.get('domain_id'), user=request.user)
+	except:
+		raise Http404
+	
+	domain.delete()
+	return HttpResponseRedirect('/dashboard-cust/domain-email')
+
+@login_required()
+def edit_domain_email(request, domain_id):
+	try:
+		domain = MailDomain.objects.get(id=domain_id, user=request.user)
+	except:
+		raise Http404
+	if request.method == 'GET':
+		form = DomainNotesEditForm(instance=domain)
+		return render_to_response('userdash_edit_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'domain':domain, 'menu_email':'active'}, RequestContext(request))
+	else:
+		form = DomainNotesEditForm(request.POST, instance=domain)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/dashboard-cust/domain-email')
+        else:
+        	return render_to_response('userdash_edit_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'domain':domain, 'menu_email':'active'}, RequestContext(request))
+
+@login_required()
 def error_domain_email(request):
 		return render_to_response('userdash_error_domain_email.html', {'user_balance':get_balance(request), 'menu_email':'active'}, RequestContext(request))
 
@@ -93,17 +133,11 @@ def edit_user_email(request, error = None, post_id = None):
 	except:
 		raise Http404
 
-	try:
-		domain =  MailDomain.objects.filter(user=request.user)
-	except MailDomain.DoesNotExist:
-		raise Http404
-
 	return render_to_response('userdash_edit_user_email.html',
 		{
 			'user_balance':get_balance(request),
 			'usermail':usermail,
 			'error':error,
-			'domain':domain,
 			'menu_email':'active'
 		}, RequestContext(request))
 
@@ -157,6 +191,29 @@ def add_user_email(request, error = None, berhasil = None, success = False):
 		'user_balance':get_balance(request),
 		'menu_email':'active'
 		}, RequestContext(request))
+
+@login_required()
+def delete_user_email(request, usermail_id):
+	try:
+		usermail = MailUser.objects.select_related('domain').get(id=usermail_id, domain__user=request.user)
+	except:
+		raise Http404
+
+	if request.method == 'GET':
+		return render_to_response('userdash_delete_user_email.html', {'user_balance':get_balance(request), 'usermail':usermail, 'menu_email':'active'}, RequestContext(request))
+	else:
+		raise Http404
+
+@login_required()
+@require_POST
+def delete_confirm_user_email(request):
+	try:
+		usermail = MailUser.objects.select_related('domain').get(id=request.POST.get('usermail_id'), domain__user=request.user)
+	except:
+		raise Http404
+	
+	usermail.delete()
+	return HttpResponseRedirect('/dashboard-cust/user-email')
 
 def generate_code():
 	result = ''

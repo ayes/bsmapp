@@ -14,6 +14,7 @@
 				<tr>
 					<th>Nama Domain</th>
 					<th>Keterangan</th>
+					<th width="5%">Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -21,10 +22,14 @@
 					<tr>
 						<td>{{ dom.domain }}</td>
 						<td>{{ dom.notes }}</td>
+						<td nowrap>
+							<a href="/dashboard-cust/edit-domain-email/{{ dom.id }}"><span class="label label-primary">Ganti Keterangan</span></a>
+							<a href="/dashboard-cust/delete-domain-email/{{ dom.id }}"><span class="label label-warning">Hapus</span></a>
+						</td>
 					</tr>
 					{% empty %}
 					<tr>
-						<td colspan="2">Belum ada data yang tersedia</td>
+						<td colspan="3">Belum ada data yang tersedia</td>
 					</tr>
 				{% endfor %}
 			</tbody>

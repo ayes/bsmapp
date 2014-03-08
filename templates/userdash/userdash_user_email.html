@@ -16,13 +16,12 @@
 				<tr>
 					<th>Nama User</th>
 					<th>Nama Domain</th>
-					<th>Keterangan</th>
 					<th>Password</th>
 					<th>Quota</th>
 					<th>Aktif</th>
 					<th>Tanggal Mulai</th>
 					<th>Tanggal Berakhir</th>
-					<th>Aksi</th>
+					<th width="5%">Aksi</th>
 				</tr>
 			</thead>
 			
@@ -31,7 +30,6 @@
 					<tr>
 						<td>{{ usr.username }}</td>
 						<td>{{ usr.domain }}</td>
-						<td>{{ usr.domain.notes }}</td>
 						<td>{{ usr.password }}</td>
 						<td>{{ usr.quota }}</td>
 						{% if usr.active == True %}
@@ -41,8 +39,9 @@
 						{% endif %}
 						<td>{{ usr.date_begin }}</td>
 						<td>{{ usr.date_expired }}</td>
-						<td>
+						<td nowrap>
 							<a href="/dashboard-cust/edit-user-email/{{ usr.id }}"><span class="label label-primary">Ganti Password</span></a>
+							<a href="/dashboard-cust/delete-user-email/{{ usr.id }}"><span class="label label-warning">Hapus</span></a>
 						</td>
 					</tr>
 					{% empty %}

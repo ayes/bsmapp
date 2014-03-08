@@ -25,11 +25,11 @@ class TicketSupport(models.Model):
 class ReplaySupport(models.Model):
 	ticket = models.ForeignKey(TicketSupport, verbose_name = 'Ticket')
 	user = models.ForeignKey(User)
-	body = models.TextField('Komentar', max_length=1024)
+	body = models.TextField(u'Komentar', max_length=1024)
 	post_date = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
-		return self.ticket.id
+		return str(self.ticket.pk)
 
 	class Meta:
 		db_table = 'support_replay'

@@ -1,0 +1,19 @@
+{% extends "userdash_bbase.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="span4"><h2>Menghapus User Email Anda</h2></div>
+	</div>
+
+	<hr />
+	User Email: <b>{{ usermail.username }}@{{ usermail.domain }}</b>
+	<p>Benar ingin menghapus?</p>
+	<form action="/dashboard-cust/delete-confirm-user-email" method="post">
+		<input type="hidden" name="usermail_id" value="{{ usermail.id }}">
+	{% csrf_token %}
+		<div class="form-actions">
+		<button type="submit" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Hapus User Email</button>
+		<a href="/dashboard-cust/user-email" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Batal</a>
+		</div>
+	</form>
+{% endblock %}
