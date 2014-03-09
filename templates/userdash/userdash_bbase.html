@@ -155,6 +155,8 @@
 </div> <!-- /#header -->
 
 
+{% load gravatar %}
+
 
 
 <div id="masthead">
@@ -164,6 +166,7 @@
 		<div class="masthead-pad">
 			
 			<div class="masthead-text">
+				<img src="{% gravatar_for_user user 50 g %}" style="position: absolute; display: block; left: -60px; top: -5px; border-radius: 50%;" />
 				<h2>{{ user.first_name }} {{ user.last_name }}</h2>
 			</div> <!-- /.masthead-text -->
 			
