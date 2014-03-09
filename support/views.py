@@ -37,17 +37,16 @@ def add_support_ticket(request):
 
 @login_required()
 def view_support_ticket(request, ticket_id):
+	try:
+		ticket = TicketSupport.objects.get(pk=ticket_id, user=request.user)
+	except:
+		raise Http404
+
+	try:
+		support = ReplaySupport.objects.select_related('ticket').filter(ticket=ticket_id, ticket__user=request.user).order_by('-pk')
+	except:
+		support = {}
 	if request.method == 'GET':
-		try:
-			ticket = TicketSupport.objects.get(pk=ticket_id, user=request.user)
-		except:
-			raise Http404
-
-		try:
-			support = ReplaySupport.objects.select_related('ticket').filter(ticket=ticket_id, ticket__user=request.user).order_by('-pk')
-		except:
-			support = {}
-
 		form = ReplaySupportForm()
 		return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form, 'ticket':ticket, 'menu_support':'active'}, RequestContext(request))
 	else:
@@ -57,7 +56,7 @@ def view_support_ticket(request, ticket_id):
 			instance.save()
 			return HttpResponseRedirect('/dashboard-cust/view-support-ticket/' + request.POST.get('idsupport'))
 		else:
-			return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form, 'menu_support':'active'}, RequestContext(request))
+			return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form, 'ticket':ticket, 'menu_support':'active'}, RequestContext(request))
 
 @login_required()
 def close_support_ticket(request, ticket_id):

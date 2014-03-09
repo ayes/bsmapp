@@ -16,6 +16,7 @@
 	<hr />
 	<div class="row">
 		<div class="span12">
+			{% if error %}<div class="alert alert-warning">{{ error }}</div>{% endif %}
 			<form action="/dashboard-cust/view-support-ticket/{{ ticket.id }}" method="post">
 			<div class="form-actions">
 				<input type="hidden" name="idsupport" value="{{ ticket.id }}">

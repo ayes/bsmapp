@@ -24,3 +24,5 @@ class DomainNotesEditForm(forms.ModelForm):
 	class Meta:
 		model = MailDomain
 		fields = ('notes',)
+
+#class ChangePasswordForm
