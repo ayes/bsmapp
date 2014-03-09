@@ -340,3 +340,12 @@ def deposit_paypal(request):
 	form = PayPalPaymentsForm(initial=paypal_dict)
 	context = {'form': form, 'depo':deposit, 'user_balance':get_balance(request), 'no_invoice':no_invoice, 'menu_payment':'active'}
 	return render_to_response("userdash_paypal.html", context)
+
+from django.contrib.auth.views import password_change as builtin_password_change
+from django.contrib.auth.views import password_change_done as builtin_password_change_done
+
+def password_change(request, **kwargs):
+	return builtin_password_change(request, extra_context = {'user_balance': get_balance(request)}, **kwargs)
+
+def password_change_done(request, **kwargs):
+	return builtin_password_change_done(request, extra_context = {'user_balance': get_balance(request)}, **kwargs)

@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 
+from views import get_balance
+
 urlpatterns = patterns('',
 	url(r'^dashboard-cust/?$', 'userdash.views.dashboard_cust'),
 	url(r'^dashboard-cust/logout/?$','userdash.views.logout'),
@@ -29,8 +31,11 @@ urlpatterns = patterns('',
 
 	# profile customer
 	url(r'^dashboard-cust/customer-profile/?', 'userdash.views.customer_profile'),
-	url(r'^dashboard-cust/change-password/$', 'django.contrib.auth.views.password_change', {'post_change_redirect' : '/dashboard-cust/change-password-done/', 'template_name': 'userdash_change_customer_password.html',}),
-    url(r'^dashboard-cust/change-password-done/$', 'django.contrib.auth.views.password_change_done', {'template_name': 'userdash_change_customer_password_done.html',}),
+	#url(r'^dashboard-cust/change-password/$', 'django.contrib.auth.views.password_change', {'post_change_redirect' : '/dashboard-cust/change-password-done/', 'template_name': 'userdash_change_customer_password.html', 'extra_context': {'user_balance': get_balance(request)}}),
+    #url(r'^dashboard-cust/change-password-done/$', 'django.contrib.auth.views.password_change_done', {'template_name': 'userdash_change_customer_password_done.html',}),
+
+    url(r'^dashboard-cust/change-password/$', 'userdash.views.password_change', {'post_change_redirect' : '/dashboard-cust/change-password-done/', 'template_name': 'userdash_change_customer_password.html'}),
+    url(r'^dashboard-cust/change-password-done/$', 'userdash.views.password_change_done', {'template_name': 'userdash_change_customer_password_done.html',}),
 )
 
 urlpatterns += patterns('',
