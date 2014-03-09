@@ -71,14 +71,3 @@ class MailUser(models.Model):
 		verbose_name = 'mail user'
 		verbose_name_plural = 'mail users'
 		ordering = ('username',)
-
-class Alamat(models.Model):
-	user = models.ForeignKey(User)
-	nama = models.CharField(u'Domain name', max_length = 10, help_text = 'Domain name to serve (example: bsmsite.com)')
-	alamat = models.CharField(u'Notes', max_length = 10, help_text = 'Anything about this domain')
-
-	def __unicode__(self):
-		return self.nama
-
-	class Meta:
-		db_table = 'testing'

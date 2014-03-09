@@ -8,11 +8,14 @@ from django.http import HttpResponseRedirect, Http404
 @login_required()
 def support(request):
 	try:
-		support = TicketSupport.objects.filter(user=request.user).order_by('-pk')
+		ticket = TicketSupport.objects.filter(user=request.user).exclude(status=3)
 	except:
-		support = {}
-
-	return render_to_response('support_ticket.html', {'user_balance':get_balance(request), 'support':support, 'menu_support':'active'}, RequestContext(request))
+		ticket = {}
+	try:
+		ticket_closed = TicketSupport.objects.filter(user=request.user, status=3)
+	except:
+		ticket_closed = {}
+	return render_to_response('support_ticket.html', {'user_balance':get_balance(request), 'ticket':ticket, 'ticket_closed':ticket_closed, 'menu_support':'active'}, RequestContext(request))
 
 @login_required()
 def add_support_ticket(request):
@@ -36,12 +39,12 @@ def add_support_ticket(request):
 def view_support_ticket(request, ticket_id):
 	if request.method == 'GET':
 		try:
-			ticket = TicketSupport.objects.get(pk=ticket_id)
+			ticket = TicketSupport.objects.get(pk=ticket_id, user=request.user)
 		except:
 			raise Http404
 
 		try:
-			support = ReplaySupport.objects.select_related('ticket').filter(ticket=ticket_id).order_by('-pk')
+			support = ReplaySupport.objects.select_related('ticket').filter(ticket=ticket_id, ticket__user=request.user).order_by('-pk')
 		except:
 			support = {}
 
@@ -55,3 +58,13 @@ def view_support_ticket(request, ticket_id):
 			return HttpResponseRedirect('/dashboard-cust/view-support-ticket/' + request.POST.get('idsupport'))
 		else:
 			return render_to_response('support_view_ticket.html', {'user_balance':get_balance(request), 'support':support, 'form':form, 'menu_support':'active'}, RequestContext(request))
+
+@login_required()
+def close_support_ticket(request, ticket_id):
+	try:
+		ticket = TicketSupport.objects.get(pk=ticket_id, user=request.user)
+	except:
+		raise Http404
+	ticket.status = 3
+	ticket.save()
+	return HttpResponseRedirect('/dashboard-cust/support')
