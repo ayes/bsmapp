@@ -94,6 +94,12 @@ class MailAlias(models.Model):
  	def destination_domain(self):
  		return self.destination.domain
 
+ 	def source_address(self):
+ 		return "%s@%s" % (self.source, self.domain)
+
+ 	def destination_address(self):
+ 		return "%s@%s" % (self.destination.username, self.destination.domain)
+
  	class Meta:
  		db_table = 'aliases'
  		verbose_name = 'mail alias'
