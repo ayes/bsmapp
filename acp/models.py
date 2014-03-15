@@ -3,6 +3,7 @@
 from django.db import models
 from django.forms import ValidationError
 from django.contrib.auth.models import User
+import re
 
 class Orderable(models.Model):
 	position = models.IntegerField(u'Position', blank = True)
@@ -51,6 +52,10 @@ class MailQuota(models.Model):
 		verbose_name = 'Mail quota'
 		verbose_name_plural = 'Mail quotas'
 
+def validate_username(username):
+	if re.match(r'^[a-z_]+$', username) is None:
+		raise ValidationError('Wrong username format. Please use only latin letters (a-z) and the underscore (_)')
+
 class MailUser(models.Model):
 	def __unicode__(self):
 		return self.username
@@ -58,7 +63,7 @@ class MailUser(models.Model):
 	def mailbox_size(self):
 		return self.quota.title
 
-	username = models.CharField('Username', max_length = 64, help_text = 'Left part (before @ sign) of the e-mail address')
+	username = models.CharField('Username', max_length = 64, help_text = 'Left part (before @ sign) of the e-mail address', validators = [validate_username])
 	domain = models.ForeignKey(MailDomain, verbose_name = 'Domain')
 	password = models.CharField('Password', max_length = 32, help_text = 'Used to connect through POP, IMAP and SMTP')
 	quota = models.ForeignKey(MailQuota, verbose_name = 'Mailbox size')
@@ -71,3 +76,26 @@ class MailUser(models.Model):
 		verbose_name = 'mail user'
 		verbose_name_plural = 'mail users'
 		ordering = ('username',)
+
+def validate_alias_source(source_name):
+	if re.match(r'^[a-z_]+$', source_name) is None:
+		raise ValidationError('Wrong alias source format. Please use only latin letters (a-z) and the underscore (_)')
+
+class MailAlias(models.Model):
+	source = models.CharField('Alias source', max_length = 64, help_text = 'Left part (before @ sign) of the alias', validators = [validate_alias_source])
+	destination = models.ForeignKey(MailUser, verbose_name = 'Destination mailbox')
+	active = models.BooleanField('Access', default = True, help_text = 'Activity flag')
+ 	date_begin = models.DateTimeField(auto_now_add = True)
+ 	date_expired = models.DateTimeField('Date Expired')
+
+ 	def __unicode__(self):
+ 		return self.source
+
+ 	def destination_domain(self):
+ 		return self.destination.domain
+
+ 	class Meta:
+ 		db_table = 'aliases'
+ 		verbose_name = 'mail alias'
+ 		verbose_name_plural = 'mail aliases'
+ 		ordering = ('source',)

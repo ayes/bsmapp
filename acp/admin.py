@@ -25,8 +25,12 @@ class MailUserAdmin(admin.ModelAdmin):
 class MailQuotaAdmin(admin.ModelAdmin):
 	list_display = ('__unicode__', 'price')
 
+class MailAliasAdmin(admin.ModelAdmin):
+	list_display = ('__unicode__', 'destination', 'destination_domain')
+
 admin.site.register(MailDomain, MailDomainAdmin)
 admin.site.register(MailUser, MailUserAdmin)
 admin.site.register(MailQuota, MailQuotaAdmin)
+admin.site.register(MailAlias, MailAliasAdmin)
 
 #admin.site.unregister(Group)
