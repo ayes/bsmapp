@@ -105,4 +105,3 @@ class MailAlias(models.Model):
  		db_table = 'aliases'
  		verbose_name = 'mail alias'
  		verbose_name_plural = 'mail aliases'
- 		ordering = ('source',)
