@@ -58,7 +58,7 @@ def validate_username(username):
 
 class MailUser(models.Model):
 	def __unicode__(self):
-		return self.username
+		return self.address()
 
 	def mailbox_size(self):
 		return self.quota.title
@@ -70,6 +70,9 @@ class MailUser(models.Model):
  	active = models.BooleanField('Access', default=True, help_text = 'Disabling the user’s access does not destroy his mailbox')
  	date_begin = models.DateTimeField(auto_now_add=True)
  	date_expired = models.DateTimeField('Date Expired')
+
+ 	def address(self):
+ 		return "%s@%s" % (self.username, self.domain)
 
 	class Meta:
 		db_table = 'users'
