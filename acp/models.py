@@ -53,8 +53,8 @@ class MailQuota(models.Model):
 		verbose_name_plural = 'Mail quotas'
 
 def validate_username(username):
-	if re.match(r'^[a-z_]+$', username) is None:
-		raise ValidationError('Wrong username format. Please use only latin letters (a-z) and the underscore (_)')
+	if re.match(r'^[a-z0-9_]+$', username) is None:
+		raise ValidationError('Wrong username format. Please use only latin letters (a-z), digits (0-9) and the underscore (_)')
 
 class MailUser(models.Model):
 	def __unicode__(self):
