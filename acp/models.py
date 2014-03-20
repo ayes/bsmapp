@@ -82,8 +82,9 @@ def validate_alias_source(source_name):
 		raise ValidationError('Wrong alias source format. Please use only latin letters (a-z) and the underscore (_)')
 
 class MailAlias(models.Model):
-	source = models.CharField('Alias source', max_length = 64, help_text = 'Left part (before @ sign) of the alias', validators = [validate_alias_source])
-	destination = models.ForeignKey(MailUser, verbose_name = 'Destination mailbox')
+	source_username = models.CharField('Source username', max_length = 64, help_text = 'Left part (before @ sign) of the alias', validators = [validate_alias_source])
+	source_domain = models.ForeignKey(MailDomain, verbose_name = 'Source domain', help_text = 'Source domain (right part of the alias)')
+	destination = models.ForeignKey(MailUser, verbose_name = 'Destination mailbox', help_text = 'Mails will be delivered to this mailbox')
 	active = models.BooleanField('Access', default = True, help_text = 'Activity flag')
  	date_begin = models.DateTimeField(auto_now_add = True)
  	date_expired = models.DateTimeField('Date Expired')
@@ -95,7 +96,7 @@ class MailAlias(models.Model):
  		return self.destination.domain
 
  	def source_address(self):
- 		return "%s@%s" % (self.source, self.domain)
+ 		return "%s@%s" % (self.source_username, self.source_domain)
 
  	def destination_address(self):
  		return "%s@%s" % (self.destination.username, self.destination.domain)
