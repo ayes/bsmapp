@@ -90,7 +90,7 @@ class MailAlias(models.Model):
  	date_expired = models.DateTimeField('Date Expired')
 
  	def __unicode__(self):
- 		return self.source
+ 		return self.source_address()
 
  	def destination_domain(self):
  		return self.destination.domain
