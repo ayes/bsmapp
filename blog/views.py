@@ -16,7 +16,7 @@ def get_post_lainnya(request):
 
 	return pl
 
-def get_kategori(request):
+def get_kategori():
 	try:
 		kategori = Kategori.objects.all()
 	except:
@@ -33,7 +33,7 @@ def blog_category(request, kategori_id):
 	return render_to_response('blog_main.html',
 		{
 			'blog_list':blog_list,
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'pl_list':get_post_lainnya(request),
 			'style':get_style()
 		}, RequestContext(request))
@@ -47,7 +47,7 @@ def blog_read(request, post_id):
 	return render_to_response('blog_read.html',
 		{
 			'bl':blog_list,
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'pl_list':get_post_lainnya(request),
 			'style':get_style()
 		}, RequestContext(request))
@@ -58,7 +58,7 @@ def blog(request):
 	return render_to_response('blog_main.html',
 		{
 			'blog_list':blog_list,
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'pl_list':get_post_lainnya(request),
 			'style':get_style()
 		}, RequestContext(request))

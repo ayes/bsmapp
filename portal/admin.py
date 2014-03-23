@@ -10,10 +10,6 @@ class KategoriPortFolioAdmin(admin.ModelAdmin):
 class PortFolioAdmin(admin.ModelAdmin):
 	pass
 
-class DownloadAdmin(admin.ModelAdmin):
-	pass
-
 admin.site.register(SoftProfile, SoftProfileAdmin)
 admin.site.register(KategoriPortFolio, KategoriPortFolioAdmin)
 admin.site.register(PortFolio, PortFolioAdmin)
-admin.site.register(Download, DownloadAdmin)

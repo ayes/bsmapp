@@ -15,7 +15,5 @@ urlpatterns = patterns('',
 	url(r'^about-us/?', 'portal.views.about_us'),
 	url(r'^search/$', 'portal.views.search'),
 	url(r'^portfolio/?', 'portal.views.portfolio'),
-	url(r'^download/?', 'portal.views.ratudewi_download'),
-	url(r'^single-download/?', 'portal.views.download_view'),
-	url(r'^login/?', 'portal.views.login'),
+	#url(r'^login/$', 'portal.views.login'),
 )

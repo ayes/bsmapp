@@ -40,7 +40,7 @@ def contacts_page(request, error = None, berhasil = None, success = False):
 	
 	return render_to_response('portal_contact_us.html',
 		{
-		'kategori_list':get_kategori(request),
+		'kategori_list':get_kategori(),
 		'style':get_style(),
 		'success': success,
 		'captcha': make_captcha(request),

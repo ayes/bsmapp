@@ -37,9 +37,3 @@ class PortFolio(models.Model):
 
 	class Meta:
 		db_table = 'portal_portfolio'
-
-class Download(models.Model):
-	count = models.PositiveIntegerField('Counter', default = 0)
-
-	class Meta:
-		db_table = 'portal_download'

@@ -20,7 +20,7 @@ def main(request):
 
 	return render_to_response('portal_main.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 			'portfolio':portfolio,
 		}, RequestContext(request))
@@ -28,63 +28,63 @@ def main(request):
 def fazashop(request):
 	return render_to_response('portal_product_fazashop.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def bsmretailpos(request):
 	return render_to_response('portal_product_bsmretailpos.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def webdevelopment(request):
 	return render_to_response('portal_service_web_development.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def mailserver(request):
 	return render_to_response('portal_service_mail_server.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def radiostreaming(request):
 	return render_to_response('portal_service_radio_streaming.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def labs_zamanda(request):
 	return render_to_response('portal_labs_zamanda.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def labs_siak(request):
 	return render_to_response('portal_labs_siak.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def contact_us(request):
 	return render_to_response('portal_contact_us.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
 def about_us(request):
 	return render_to_response('portal_about_us.html',
 		{
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
@@ -103,7 +103,7 @@ def portfolio(request):
 		{
 			'kategori':kategori,
 			'portfolio':portfolio,
-			'kategori_list':get_kategori(request),
+			'kategori_list':get_kategori(),
 			'style':get_style(),
 		}, RequestContext(request))
 
@@ -124,37 +124,9 @@ def search(request):
 		else:
 			blog = Post.objects.filter(judul__icontains=q)
 			return render(request, 'portal_search_results.html',
-				{'blog': blog, 'query': q, 'kategori_list':get_kategori(request), 'style':get_style()})
+				{'blog': blog, 'query': q, 'kategori_list':get_kategori(), 'style':get_style()})
 	return render(request, 'portal_search_results.html',
 		{'errors': errors, 'query': q, 'kategori_list':get_kategori(request), 'style':get_style()})
-
-def ratudewi_download(request):
-	try:
-		dl = Download.objects.get(id=1)
-	except:
-		dl = {}
-
-	return render_to_response('portal_ratudewi_download.html',
-		{
-			'kategori_list':get_kategori(request),
-			'style':get_style(),
-			'dl':dl,
-		}, RequestContext(request))
-
-def download_view(request):
-	#filename = 'media/geted_xfiles/Ratu Dewi - Cintamu Oplosan.mp3'
-	#file = open(filename,"r")
-	#mimetype = mimetypes.guess_type(filename)[0]
-	#if not mimetype: mimetype = "application/octet-stream"
-
-	#response = HttpResponse(file.read(), mimetype=mimetype)
-	#response["Content-Disposition"]= "attachment; filename=%s" % os.path.split(filename)[1]
-
-	dl = Download.objects.get(id=1)
-	dl.count += 1
-	dl.save()
-
-	return HttpResponseRedirect('https://dl.dropboxusercontent.com/s/lkqrzcp4f7e9v7h/Ratu%20Dewi%20-%20Cintamu%20Oplosan.mp3?dl=1&token_hash=AAEg4vLKOLagMo13i1SQajrE_WVMjfSUY0Vb5LD4_CG9ew')
 
 def login(request):
 	if request.user.is_authenticated():
@@ -162,7 +134,7 @@ def login(request):
 	if request.method == 'GET':
 		return render_to_response('portal_login_page.html',
 			{
-				'kategori_list':get_kategori(request),
+				'kategori_list':get_kategori(),
 				'style':get_style(),
 			}, RequestContext(request))
 	else:
@@ -181,6 +153,6 @@ def login(request):
 			return render_to_response('portal_login_page.html', 
 				{
 					'error': u'Password login tidak valid',
-					'kategori_list':get_kategori(request),
+					'kategori_list':get_kategori(),
 					'style':get_style(),
 				}, RequestContext(request))

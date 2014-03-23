@@ -13,9 +13,17 @@ import random
 from django.views.decorators.http import require_POST
 from datetime import datetime, timedelta
 from dns.resolver import Resolver
+from userdash.models import UserBalance
 
 def get_balance(request):
-	return UserBalance.objects.get(user=request.user)
+	try:
+		userbalance = UserBalance.objects.get(user=request.user)
+	except:
+		balance = UserBalance(user=request.user)
+		balance.save()
+		userbalance = UserBalance.objects.get(user=request.user)
+
+	return userbalance
 
 @login_required()
 def dashboard_cust(request):
@@ -25,6 +33,17 @@ def dashboard_cust(request):
 def logout(request):
 	auth.logout(request)
 	return HttpResponseRedirect('/')
+
+from django.contrib.auth.views import password_change as builtin_password_change
+from django.contrib.auth.views import password_change_done as builtin_password_change_done
+
+@login_required()
+def password_change(request, **kwargs):
+	return builtin_password_change(request, extra_context = {'user_balance': get_balance(request), 'menu_setting':'active'}, **kwargs)
+
+@login_required()
+def password_change_done(request, **kwargs):
+	return builtin_password_change_done(request, extra_context = {'user_balance': get_balance(request), 'menu_setting':'active'}, **kwargs)
 
 @login_required()
 def domain_email(request):
@@ -340,12 +359,3 @@ def deposit_paypal(request):
 	form = PayPalPaymentsForm(initial=paypal_dict)
 	context = {'form': form, 'depo':deposit, 'user_balance':get_balance(request), 'no_invoice':no_invoice, 'menu_payment':'active'}
 	return render_to_response("userdash_paypal.html", context)
-
-from django.contrib.auth.views import password_change as builtin_password_change
-from django.contrib.auth.views import password_change_done as builtin_password_change_done
-
-def password_change(request, **kwargs):
-	return builtin_password_change(request, extra_context = {'user_balance': get_balance(request)}, **kwargs)
-
-def password_change_done(request, **kwargs):
-	return builtin_password_change_done(request, extra_context = {'user_balance': get_balance(request)}, **kwargs)
