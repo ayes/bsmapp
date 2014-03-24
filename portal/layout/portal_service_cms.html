@@ -1,0 +1,76 @@
+{% extends "bbase.html" %}
+
+{% load staticfiles %}
+
+{% block slider %}{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+
+  <h2>Layanan CMS</h2>
+  <p class="big grey">Pilihlah Paket aplikasi Favorit Anda</p>
+  <hr />
+
+  <!-- Services starts -->
+
+  <div class="services">
+    
+   
+   <div class="row">
+      <div class="col-md-6">
+        <div class="col-l">
+          <div class="service">
+            <div class="b-orange serv-block">
+              <i><img src="{% static "images/service-cms/wordpress.png" %}" alt="" /></i>
+              <h3>WordPress</h3>
+            </div>
+            <p>WordPress adalah salah satu platform penerbitan web yang paling populer di dunia untuk membangun blog dan website.</p>
+            <a href="#">Lihat Selengkapnya </a><i class="icon-double-angle-right"></i> 
+          </div>
+        </div>
+        <div class="col-r">
+          <div class="service">      
+            <div class="b-purple serv-block">
+              <i><img src="{% static "images/service-cms/joomla.png" %}" alt="" /></i> 
+              <h3>Joomla</h3>
+            </div>     
+            <p>Joomla! adalah Content Management System yang dapat menciptakan segala sesuatu dari situs web.</p>
+            <a href="#">Lihat Selengkapnya </a><i class="icon-double-angle-right"></i>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-6">
+        <div class="col-l">
+          <div class="service">
+            <div class="b-blue serv-block">
+              <i><img src="{% static "images/service-cms/prestashop.png" %}" alt="" /></i>
+              <h3>PrestaShop</h3>
+            </div>
+            <p>PrestaShop adalah Open-Source E-commerce digunakan lebih dari 150.000 toko online di seluruh dunia.</p>
+            <a href="#">Lihat Selengkapnya </a><i class="icon-double-angle-right"></i>
+          </div>
+        </div>
+        <div class="col-r">
+          <div class="service"> 
+            <div class="b-green serv-block">
+              <i><img src="{% static "images/service-cms/osclass.png" %}" alt="" /></i>
+              <h3>Osclass</h3>
+            </div>        
+            <p>Osclass memungkinkan Anda untuk dengan mudah membuat sebuah situs iklan baris (mobil, pekerjaan, real estate, kencan, dll).</p>
+            <a href="#">Lihat Selengkapnya </a><i class="icon-double-angle-right"></i>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>     
+   </div>
+     
+   <hr />
+
+  </div>
+
+<!-- Services Ends -->
+
+
+{% endblock %}

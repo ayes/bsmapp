@@ -53,6 +53,13 @@ def mailserver(request):
 			'style':get_style(),
 		}, RequestContext(request))
 
+def service_cms(request):
+	return render_to_response('portal_service_cms.html',
+		{
+			'kategori_list':get_kategori(),
+			'style':get_style(),
+		}, RequestContext(request))
+
 def radiostreaming(request):
 	return render_to_response('portal_service_radio_streaming.html',
 		{

@@ -15,5 +15,6 @@ urlpatterns = patterns('',
 	url(r'^about-us/?', 'portal.views.about_us'),
 	url(r'^search/$', 'portal.views.search'),
 	url(r'^portfolio/?', 'portal.views.portfolio'),
+	url(r'^service/cms?', 'portal.views.service_cms'),
 	#url(r'^login/$', 'portal.views.login'),
 )
