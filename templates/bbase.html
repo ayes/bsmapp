@@ -27,82 +27,108 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="http://bsmsite.com/media/thema/img/favicon/favicon.png">
   <style>
-    .dropdown:hover .dropdown-menu {
-      display: block;
-    }
-  </style>
+	.dropdown:hover .dropdown-menu {
+	  display: block;
+	}
+  </style><!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+	(w[c] = w[c] || []).push(function() {
+		try {
+			w.yaCounter24412603 = new Ya.Metrika({id:24412603,
+					clickmap:true,
+					trackLinks:true,
+					accurateTrackBounce:true});
+		} catch(e) { }
+	});
+
+	var n = d.getElementsByTagName("script")[0],
+		s = d.createElement("script"),
+		f = function () { n.parentNode.insertBefore(s, n); };
+	s.type = "text/javascript";
+	s.async = true;
+	s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+	if (w.opera == "[object Opera]") {
+		d.addEventListener("DOMContentLoaded", f, false);
+	} else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/24412603" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 </head>
 
 <body>
 <!-- Header Starts -->
   <header>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="logo">
-          <h1><a href="/" data-no-instant>BaseSystem <span class="color">Management</span></a></h1>
-          <div class="hmeta">Web Development Company</div>
-          </div>
-        </div>
+	<div class="container">
+	  <div class="row">
+		<div class="col-md-8">
+		  <div class="logo">
+		  <h1><a href="/" data-no-instant>BaseSystem <span class="color">Management</span></a></h1>
+		  <div class="hmeta">Web Development Company</div>
+		  </div>
+		</div>
 
-      <div class="col-md-4 text-right">
+	  <div class="col-md-4 text-right">
 
-        <form class="form-inline" role="form" action="/search/" method="get">
-          <div class="form-group">
-          <input type="text" class="form-control" id="search" placeholder="Ketik Sesuatu..." maxlength="200" required="required" name="q">
-          </div>
-          <button type="submit" class="btn btn-default">Cari</button>
-        </form>
-      </div>
-      </div>
-    </div>
+		<form class="form-inline" role="form" action="/search/" method="get">
+		  <div class="form-group">
+		  <input type="text" class="form-control" id="search" placeholder="Ketik Sesuatu..." maxlength="200" required="required" name="q">
+		  </div>
+		  <button type="submit" class="btn btn-default">Cari</button>
+		</form>
+	  </div>
+	  </div>
+	</div>
   </header>
 
 <!-- Navigation bar starts -->
   <div class="navbar bs-docs-nav" role="banner">
-    <div class="container">
-      <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        </button>
-      </div>
+	<div class="container">
+	  <div class="navbar-header">
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+	  </div>
 
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav">
-        <li><a href="/" data-no-instant>Beranda</a></li>
-        <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produk <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-        <li><a href="/product/faza-shop">Faza Shop</a></li>
-        <li><a href="/product/bsm-retail-pos">BSM Retail POS</a></li>
-        </ul>
-        </li>                   
-        <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layanan<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-        <li><a href="/service/web-development">Website</a></li>
-        <li><a href="/service/mail-server">Mail Server</a></li>
-        <li><a href="/service/cms">CMS</a></li>
-        <li><a href="/service/radio-streaming">Radio Streaming</a></li>
-        </ul>
-        </li>
-        <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Labs<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-        <li><a href="/labs/zamanda">Zamanda</a></li>
-        <li><a href="/labs/siak">SIAK</a></li>
-        </ul>
-        </li>
-        <li><a href="/about-us">Tentang Kami</a></li>
-        <li><a href="/blog">Blog</a></li>                 
-        <li><a href="/portfolio" data-no-instant>Portfolio</a></li>
-        <li><a href="/contact-us">Kontak Kami</a></li>
-      </ul>
-    </nav>
-    </div>
+	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+	  <ul class="nav navbar-nav">
+		<li><a href="/" data-no-instant>Beranda</a></li>
+		<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Produk <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+		<li><a href="/product/faza-shop">Faza Shop</a></li>
+		<li><a href="/product/bsm-retail-pos">BSM Retail POS</a></li>
+		</ul>
+		</li>                   
+		<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Layanan<b class="caret"></b></a>
+		<ul class="dropdown-menu">
+		<li><a href="/service/web-development">Website</a></li>
+		<li><a href="/service/mail-server">Mail Server</a></li>
+		<li><a href="/service/cms">CMS</a></li>
+		<li><a href="/service/radio-streaming">Radio Streaming</a></li>
+		</ul>
+		</li>
+		<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Labs<b class="caret"></b></a>
+		<ul class="dropdown-menu">
+		<li><a href="/labs/zamanda">Zamanda</a></li>
+		<li><a href="/labs/siak">SIAK</a></li>
+		</ul>
+		</li>
+		<li><a href="/about-us">Tentang Kami</a></li>
+		<li><a href="/blog">Blog</a></li>                 
+		<li><a href="/portfolio" data-no-instant>Portfolio</a></li>
+		<li><a href="/contact-us">Kontak Kami</a></li>
+	  </ul>
+	</nav>
+	</div>
   </div>
 <!-- Navigation bar ends -->
 
@@ -243,11 +269,11 @@
 
 <div class="social-links">
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <p class="big"><span>Follow Kami Di</span> <a href="https://www.facebook.com/pages/BaseSystem-Management/132215933462634" target="_blank"><i class="icon-facebook"></i>Facebook</a> <a href="https://twitter.com/exor14" target="_blank"><i class="icon-twitter"></i>Twitter</a> <a href="https://plus.google.com/101835897323506072586" target="_blank"><i class="icon-google-plus"></i>Google Plus</a> <a href="http://id.linkedin.com/pub/irfan-mahfudz-guntur/4b/64/b01/" target="_blank"><i class="icon-linkedin"></i>LinkedIn</a></p>
-      </div>
-    </div>    
+	<div class="row">
+	  <div class="col-md-12">
+		<p class="big"><span>Follow Kami Di</span> <a href="https://www.facebook.com/pages/BaseSystem-Management/132215933462634" target="_blank"><i class="icon-facebook"></i>Facebook</a> <a href="https://twitter.com/exor14" target="_blank"><i class="icon-twitter"></i>Twitter</a> <a href="https://plus.google.com/101835897323506072586" target="_blank"><i class="icon-google-plus"></i>Google Plus</a> <a href="http://id.linkedin.com/pub/irfan-mahfudz-guntur/4b/64/b01/" target="_blank"><i class="icon-linkedin"></i>LinkedIn</a></p>
+	  </div>
+	</div>    
   </div>
 </div>
 
@@ -255,90 +281,90 @@
 <!-- Footer -->
 <footer>
   <div class="container">
-    <div class="row">
+	<div class="row">
 
-      <div class="widgets">
-        <div class="col-md-4">
-          <div class="fwidget">
+	  <div class="widgets">
+		<div class="col-md-4">
+		  <div class="fwidget">
 
-            <div class="col-l">
-              <h6>Produk</h6>
-              <ul>
-              <li><a href="/product/faza-shop">Faza Shop</a></li>
-              <li><a href="/product/bsm-retail-pos">BSM Retail POS</a></li>
+			<div class="col-l">
+			  <h6>Produk</h6>
+			  <ul>
+			  <li><a href="/product/faza-shop">Faza Shop</a></li>
+			  <li><a href="/product/bsm-retail-pos">BSM Retail POS</a></li>
 
-              </ul>
-            </div>
+			  </ul>
+			</div>
 
-            <div class="col-r">
-              <h6>Layanan</h6>
-              <ul>
+			<div class="col-r">
+			  <h6>Layanan</h6>
+			  <ul>
 				<li><a href="/service/web-development">Website</a></li>
 				<li><a href="/service/mail-server">Mail Server</a></li>
 				<li><a href="/service/radio-streaming">Radio Streaming</a></li>
 
-              </ul>
-            </div>
+			  </ul>
+			</div>
 
-          </div>
-        </div>
+		  </div>
+		</div>
 
-        <div class="col-md-2">
-          <div class="fwidget">
-            <h6>Laboratorium</h6>
-            <ul>
-              <li><a href="/labs/zamanda">Zamanda</a></li>
-              <li><a href="/labs/siak">SIAK</a></li>
-            </ul>
-          </div>
-        </div>
+		<div class="col-md-2">
+		  <div class="fwidget">
+			<h6>Laboratorium</h6>
+			<ul>
+			  <li><a href="/labs/zamanda">Zamanda</a></li>
+			  <li><a href="/labs/siak">SIAK</a></li>
+			</ul>
+		  </div>
+		</div>
 
-         <div class="col-md-2">
-          <div class="fwidget">
-            <h6>Blog Kategori</h6>
-            <ul>
-            {% for kategori in kategori_list %}
-            <li><a href="/blog-category/{{ kategori.id }}">{{ kategori }}</a></li>
-            {% endfor %}
-            </ul>
-          </div>
-        </div>
+		 <div class="col-md-2">
+		  <div class="fwidget">
+			<h6>Blog Kategori</h6>
+			<ul>
+			{% for kategori in kategori_list %}
+			<li><a href="/blog-category/{{ kategori.id }}">{{ kategori }}</a></li>
+			{% endfor %}
+			</ul>
+		  </div>
+		</div>
 
-        <div class="col-md-4">
-          <div class="fwidget">
-            <h5 class="title">Alamat:</h5>
-                                       <div class="address">
-                                           <address>
-                                              <!-- Company name -->
-                                              BaseSystem Management<br />
-                                              <!-- Address -->
-                                              Pondok Sambutan Permai Blok. AG. No. 3<br />
-                                              Samarinda — 75115<br />
-                                              Kalimantan Timur<br />
-                                              Indonesia<br />
-                                              <!-- Phone number -->
-                                              +62 (812) 534–75–474
-                                           </address>
-                                            
-                                           <address>
-                                              <!-- Name -->
-                                              Irfan Mahfudz Guntur<br>
-                                              <!-- Email -->
-                                              <a href="mailto:ayes@bsmsite.com">ayes@bsmsite.com</a>
-                                           </address> 
-                                       </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row"> 
-      <div class="col-md-12">
-          <div class="copy">
-            <h6>BaseSystem <span class="color">Management</span></h6>
-            <p>Copyright &copy; 2006–2014 <a href="http://bsmsite.com/" data-no-instant>BaseSystem Management</a> — <a href="/" data-no-instant>Beranda</a> | <a href="/about-us">Tentang Kami</a> | <a href="#">FAQ</a> | <a href="/contact-us">Kontak Kami</a></p>
-          </div>
-      </div>
-    </div>
+		<div class="col-md-4">
+		  <div class="fwidget">
+			<h5 class="title">Alamat:</h5>
+									   <div class="address">
+										   <address>
+											  <!-- Company name -->
+											  BaseSystem Management<br />
+											  <!-- Address -->
+											  Pondok Sambutan Permai Blok. AG. No. 3<br />
+											  Samarinda — 75115<br />
+											  Kalimantan Timur<br />
+											  Indonesia<br />
+											  <!-- Phone number -->
+											  +62 (812) 534–75–474
+										   </address>
+											
+										   <address>
+											  <!-- Name -->
+											  Irfan Mahfudz Guntur<br>
+											  <!-- Email -->
+											  <a href="mailto:ayes@bsmsite.com">ayes@bsmsite.com</a>
+										   </address> 
+									   </div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div class="row"> 
+	  <div class="col-md-12">
+		  <div class="copy">
+			<h6>BaseSystem <span class="color">Management</span></h6>
+			<p>Copyright &copy; 2006–2014 <a href="http://bsmsite.com/" data-no-instant>BaseSystem Management</a> — <a href="/" data-no-instant>Beranda</a> | <a href="/about-us">Tentang Kami</a> | <a href="#">FAQ</a> | <a href="/contact-us">Kontak Kami</a></p>
+		  </div>
+	  </div>
+	</div>
   <div class="clearfix"></div>
   </div>
 </footer> 
