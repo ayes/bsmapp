@@ -8,12 +8,12 @@
 	<hr />
 	User Email: <b>{{ usermail.username }}@{{ usermail.domain }}</b>
 	<p>Benar ingin menghapus?</p>
-	<form action="/dashboard-cust/delete-confirm-user-email" method="post">
+	<form action="/dashboard-cust/email/delete-confirm-usermail" method="post">
 		<input type="hidden" name="usermail_id" value="{{ usermail.id }}">
 	{% csrf_token %}
 		<div class="form-actions">
 		<button type="submit" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Hapus User Email</button>
-		<a href="/dashboard-cust/user-email" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Batal</a>
+		<a href="/dashboard-cust/email/usermail" class="btn btn-primary btn-large"><i class="fa fa-star"></i> Batal</a>
 		</div>
 	</form>
 {% endblock %}

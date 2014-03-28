@@ -6,7 +6,7 @@
 	</div>
 
 	<hr />
-	<form action="/dashboard-cust/edit-domain-email/{{ domain.id }}" method="post">
+	<form action="/dashboard-cust/email/edit-domain/{{ domain.id }}" method="post">
 	{{ form.as_p}}
 	{% csrf_token %}
 		<div class="form-actions">

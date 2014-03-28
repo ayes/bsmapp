@@ -77,18 +77,18 @@ def add_domain_email(request):
 
 				address = uncached_resolver.query(request.POST.get('domain'), 'MX')
 			except:
-				return HttpResponseRedirect('/dashboard-cust/error-domain-email')
+				return HttpResponseRedirect('/dashboard-cust/email/error-domain')
 
 			try:
 				exchanger = str(address[0])
 				if not exchanger.endswidth('bsmsite.com.'): # NOTE: srv.bsmsite.com and mail.bsmsite.com are both valid
-					return HttpResponseRedirect('/dashboard-cust/error-domain-email')
+					return HttpResponseRedirect('/dashboard-cust/email/error-domain')
 			except:
-				return HttpResponseRedirect('/dashboard-cust/error-domain-email')
+				return HttpResponseRedirect('/dashboard-cust/email/error-domain')
 
 			instance = MailDomain(user=request.user, domain=request.POST.get('domain'), notes=request.POST.get('notes'))
 			instance.save()
-			return HttpResponseRedirect('/dashboard-cust/domain-email')
+			return HttpResponseRedirect('/dashboard-cust/email/domain')
 		else:
 			return render_to_response('userdash_add_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'menu_email':'active'}, RequestContext(request))
 
@@ -113,7 +113,7 @@ def delete_confirm_domain_email(request):
 		raise Http404
 	
 	domain.delete()
-	return HttpResponseRedirect('/dashboard-cust/domain-email')
+	return HttpResponseRedirect('/dashboard-cust/email/domain')
 
 @login_required()
 def edit_domain_email(request, domain_id):
@@ -128,7 +128,7 @@ def edit_domain_email(request, domain_id):
 		form = DomainNotesEditForm(request.POST, instance=domain)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/dashboard-cust/domain-email')
+            return HttpResponseRedirect('/dashboard-cust/email/domain')
         else:
         	return render_to_response('userdash_edit_domain_email.html', {'user_balance':get_balance(request), 'form':form, 'domain':domain, 'menu_email':'active'}, RequestContext(request))
 
@@ -178,9 +178,9 @@ def update_user_email(request):
 		usermail = MailUser.objects.get(id=idmail)
 		usermail.password= password
 		usermail.save()
-		return HttpResponseRedirect('/dashboard-cust/user-email')
+		return HttpResponseRedirect('/dashboard-cust/email/usermail')
 	else:
-		return HttpResponseRedirect('/dashboard-cust/edit-user-email')
+		return HttpResponseRedirect('/dashboard-cust/email/edit-usermail')
 
 @login_required()
 def add_user_email(request, error = None, berhasil = None, success = False):
@@ -232,7 +232,7 @@ def delete_confirm_user_email(request):
 		raise Http404
 	
 	usermail.delete()
-	return HttpResponseRedirect('/dashboard-cust/user-email')
+	return HttpResponseRedirect('/dashboard-cust/email/usermail')
 
 def generate_code():
 	result = ''
@@ -292,9 +292,9 @@ def create_user_email(request):
 		cash_balance = balance.balance
 		cashbook = CashBook(user=request.user, code='OUT', invoice=no_invoice, item=create_email, keluar=price.price, balance=cash_balance)
 		cashbook.save()
-		return HttpResponseRedirect('/dashboard-cust/user-email')
+		return HttpResponseRedirect('/dashboard-cust/email/usermail')
 	else:
-		return HttpResponseRedirect('/dashboard-cust/add-user-email')
+		return HttpResponseRedirect('/dashboard-cust/email/add-usermail')
 
 @login_required()
 def email_alias(request):
