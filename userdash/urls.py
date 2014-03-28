@@ -4,22 +4,25 @@ urlpatterns = patterns('',
 	url(r'^dashboard-cust/?$', 'userdash.views.dashboard_cust'),
 	url(r'^dashboard-cust/logout/?$','userdash.views.logout'),
 
-	# domain
-	url(r'^dashboard-cust/domain-email/?', 'userdash.views.domain_email'),
-	url(r'^dashboard-cust/add-domain-email/?', 'userdash.views.add_domain_email'),
-	url(r'^dashboard-cust/edit-domain-email/(?P<domain_id>[\d]+)$', 'userdash.views.edit_domain_email'),
-	url(r'^dashboard-cust/delete-domain-email/(?P<domain_id>[\d]+)$', 'userdash.views.delete_domain_email'),
-	url(r'^dashboard-cust/delete-confirm-domain-email/?', 'userdash.views.delete_confirm_domain_email'),
-	url(r'^dashboard-cust/error-domain-email/?', 'userdash.views.error_domain_email'),
+	# domain email
+	url(r'^dashboard-cust/email/domain/?', 'userdash.views.domain_email'),
+	url(r'^dashboard-cust/email/add-domain/?', 'userdash.views.add_domain_email'),
+	url(r'^dashboard-cust/email/edit-domain/(?P<domain_id>[\d]+)$', 'userdash.views.edit_domain_email'),
+	url(r'^dashboard-cust/email/delete-domain/(?P<domain_id>[\d]+)$', 'userdash.views.delete_domain_email'),
+	url(r'^dashboard-cust/email/delete-confirm-domain?', 'userdash.views.delete_confirm_domain_email'),
+	url(r'^dashboard-cust/email/error-domain/?', 'userdash.views.error_domain_email'),
 
 	# user email
-	url(r'^dashboard-cust/user-email/?', 'userdash.views.user_email'),
-	url(r'^dashboard-cust/edit-user-email/(?P<post_id>[\d]+)$', 'userdash.views.edit_user_email'),
-	url(r'^dashboard-cust/add-user-email/?', 'userdash.views.add_user_email'),
-	url(r'^dashboard-cust/create-user-email/?', 'userdash.views.create_user_email'),
-	url(r'^dashboard-cust/update-user-email/?', 'userdash.views.update_user_email'),
-	url(r'^dashboard-cust/delete-user-email/(?P<usermail_id>[\d]+)$', 'userdash.views.delete_user_email'),
-	url(r'^dashboard-cust/delete-confirm-user-email/?', 'userdash.views.delete_confirm_user_email'),
+	url(r'^dashboard-cust/email/usermail/?', 'userdash.views.user_email'),
+	url(r'^dashboard-cust/email/edit-usermail/(?P<post_id>[\d]+)$', 'userdash.views.edit_user_email'),
+	url(r'^dashboard-cust/email/add-usermail/?', 'userdash.views.add_user_email'),
+	url(r'^dashboard-cust/email/create-usermail/?', 'userdash.views.create_user_email'),
+	url(r'^dashboard-cust/email/update-usermail/?', 'userdash.views.update_user_email'),
+	url(r'^dashboard-cust/email/delete-usermail/(?P<usermail_id>[\d]+)$', 'userdash.views.delete_user_email'),
+	url(r'^dashboard-cust/email/delete-confirm-usermail/?', 'userdash.views.delete_confirm_user_email'),
+
+	# alias email
+	url(r'^dashboard-cust/email/alias/?', 'userdash.views.email_alias'),
 
 	# payment
 	url(r'^dashboard-cust/management-payment/?', 'userdash.views.management_payment'),

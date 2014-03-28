@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="span4"><h2>Daftar User Email Anda</h2></div>
 		<div class="span8 text-right">
-			<a href="/dashboard-cust/add-user-email" class="btn btn-large btn-secondary">Buat User Email Baru</a>
+			<a href="/dashboard-cust/email/add-usermail" class="btn btn-large btn-secondary">Buat User Email Baru</a>
 		</div>
 	</div>
 
@@ -14,9 +14,9 @@
 		<table class="table table-bordered table-striped table-highlight">
 			<thead>
 				<tr>
+					<th>#</th>
 					<th>Nama User</th>
 					<th>Nama Domain</th>
-					<th>Password</th>
 					<th>Quota</th>
 					<th>Aktif</th>
 					<th>Tanggal Mulai</th>
@@ -28,9 +28,9 @@
 			<tbody>
 				{% for usr in usermail %}
 					<tr>
+						<td> todo </td>
 						<td>{{ usr.username }}</td>
 						<td>{{ usr.domain }}</td>
-						<td>{{ usr.password }}</td>
 						<td>{{ usr.quota }}</td>
 						{% if usr.active == True %}
 						<td><i class="fa fa-check"></i></td>
@@ -40,8 +40,8 @@
 						<td>{{ usr.date_begin }}</td>
 						<td>{{ usr.date_expired }}</td>
 						<td nowrap>
-							<a href="/dashboard-cust/edit-user-email/{{ usr.id }}"><span class="label label-primary">Ganti Password</span></a>
-							<a href="/dashboard-cust/delete-user-email/{{ usr.id }}"><span class="label label-warning">Hapus</span></a>
+							<a href="/dashboard-cust/email/edit-usermail/{{ usr.id }}"><span class="label label-primary">Ganti Password</span></a>
+							<a href="/dashboard-cust/email/delete-usermail/{{ usr.id }}"><span class="label label-warning">Hapus</span></a>
 						</td>
 					</tr>
 					{% empty %}
@@ -52,4 +52,5 @@
 			</tbody>
 		</table>
 	</section>
+	todo - item conter
 {% endblock %}

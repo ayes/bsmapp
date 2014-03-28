@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="span4"><h2>Nama Domain Email Anda</h2></div>
 		<div class="span8 text-right">
-			<a href="/dashboard-cust/add-domain-email" class="btn btn-large btn-secondary">Hubungkan Domain</a>
+			<a href="/dashboard-cust/email/add-domain" class="btn btn-large btn-secondary">Hubungkan Domain</a>
 		</div>
 	</div>
 	<hr />
@@ -23,8 +23,8 @@
 						<td>{{ dom.domain }}</td>
 						<td>{{ dom.notes }}</td>
 						<td nowrap>
-							<a href="/dashboard-cust/edit-domain-email/{{ dom.id }}"><span class="label label-primary">Ganti Keterangan</span></a>
-							<a href="/dashboard-cust/delete-domain-email/{{ dom.id }}"><span class="label label-warning">Hapus</span></a>
+							<a href="/dashboard-cust/email/edit-domain/{{ dom.id }}"><span class="label label-primary">Ganti Keterangan</span></a>
+							<a href="/dashboard-cust/email/delete-domain/{{ dom.id }}"><span class="label label-warning">Hapus</span></a>
 						</td>
 					</tr>
 					{% empty %}

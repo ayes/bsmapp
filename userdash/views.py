@@ -296,6 +296,15 @@ def create_user_email(request):
 	else:
 		return HttpResponseRedirect('/dashboard-cust/add-user-email')
 
+@login_required()
+def email_alias(request):
+	try:
+		usermail = MailUser.objects.select_related('domain').filter(domain__user=request.user)
+	except:
+		usermail = {}
+
+	return render_to_response('userdash-email-alias.html', {'user_balance':get_balance(request), 'usermail':usermail, 'menu_email':'active'}, RequestContext(request))
+
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 @login_required()

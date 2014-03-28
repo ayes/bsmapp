@@ -21,9 +21,9 @@
                     <p>
                         <!-- Add filter names inside "data-filter". For example ".web-design", ".seo", etc., Filter names are used to filter the below images. -->
                            <ul id="filters">
-                             <li><a href="#" data-filter="*" class="btn btn-success">Semua</a></li>
+                             <li><a href="#" data-filter="*" class="btn btn-success">Semua</a></li>&nbsp;
                              {% for kt in kategori %}
-                             <li><a href="#" data-filter=".{{ kt.kategori }}" class="btn btn-success">{{ kt.kategori }}</a></li>
+                             <li><a href="#" data-filter=".{{ kt.kategori }}" class="btn btn-success">{{ kt.kategori }}</a></li>&nbsp;
                              {% endfor %}
                            </ul>
                     </p>
