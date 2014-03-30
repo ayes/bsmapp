@@ -9,6 +9,46 @@
 	</div>
 
 	<hr />
-
+<section id="tables">
+		<table class="table table-bordered table-striped table-highlight">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Email Alias</th>
+					<th>Email Tujuan</th>
+					<th>Aktif</th>
+					<th>Tanggal Mulai</th>
+					<th>Tanggal Berakhir</th>
+					<th width="5%">Aksi</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				{% for usr in mailalias %}
+					<tr>
+						<td> todo </td>
+						<td>{{ usr.source_address }}</td>
+						<td>{{ usr.destination_address }}</td>
+						{% if usr.active == True %}
+						<td><i class="fa fa-check"></i></td>
+						{% else %}
+						<td><i class="fa fa-times"></i></td>
+						{% endif %}
+						<td>{{ usr.date_begin }}</td>
+						<td>{{ usr.date_expired }}</td>
+						<td nowrap>
+							<a href="#"><span class="label label-primary">Ganti Alias</span></a>
+							<a href="#"><span class="label label-warning">Hapus</span></a>
+						</td>
+					</tr>
+					{% empty %}
+					<tr>
+						<td colspan="9">Belum ada data yang tersedia</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+	todo - item conter
 	
 {% endblock %}

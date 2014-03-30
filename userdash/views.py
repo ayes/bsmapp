@@ -299,11 +299,11 @@ def create_user_email(request):
 @login_required()
 def email_alias(request):
 	try:
-		usermail = MailUser.objects.select_related('domain').filter(domain__user=request.user)
+		mailalias = MailAlias.objects.select_related('source_domain').filter(source_domain__user=request.user)
 	except:
-		usermail = {}
+		mailalias = {}
 
-	return render_to_response('userdash-email-alias.html', {'user_balance':get_balance(request), 'usermail':usermail, 'menu_email':'active'}, RequestContext(request))
+	return render_to_response('userdash-email-alias.html', {'user_balance':get_balance(request), 'mailalias':mailalias, 'menu_email':'active'}, RequestContext(request))
 
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
