@@ -71,7 +71,7 @@ def add_domain_email(request):
 				for i in name_servers:
 					try:
 						authentic_address = local_resolver.query(str(i), 'A')
-						resolver.nameservers.append(str(authentic_address[0]))
+						uncached_resolver.nameservers.append(str(authentic_address[0]))
 					except: # one of the servers was broken?
 						pass
 
@@ -81,7 +81,7 @@ def add_domain_email(request):
 
 			try:
 				exchanger = str(address[0])
-				if not exchanger.endswidth('bsmsite.com.'): # NOTE: srv.bsmsite.com and mail.bsmsite.com are both valid
+				if not exchanger.endswith('bsmsite.com.'): # NOTE: srv.bsmsite.com and mail.bsmsite.com are both valid
 					return HttpResponseRedirect('/dashboard-cust/email/error-domain')
 			except:
 				return HttpResponseRedirect('/dashboard-cust/email/error-domain')
