@@ -14,7 +14,7 @@
 		<table class="table table-bordered table-striped table-highlight">
 			<thead>
 				<tr>
-					<th>#</th>
+					<th width="1" nowrap="nowrap">#</th>
 					<th>Nama User</th>
 					<th>Nama Domain</th>
 					<th>Quota</th>
@@ -28,7 +28,7 @@
 			<tbody>
 				{% for usr in usermail %}
 					<tr>
-						<td> todo </td>
+						<td width="1" nowrap="nowrap">{{ forloop.counter }}</td>
 						<td>{{ usr.username }}</td>
 						<td>{{ usr.domain }}</td>
 						<td>{{ usr.quota }}</td>
@@ -52,5 +52,5 @@
 			</tbody>
 		</table>
 	</section>
-	todo - item conter
+	Total: {{ usermail|length }}
 {% endblock %}
