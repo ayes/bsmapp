@@ -299,7 +299,7 @@ def create_user_email(request):
 @login_required()
 def email_alias(request):
 	try:
-		mailalias = MailAlias.objects.select_related('source_domain').filter(source_domain__user=request.user)
+		mailalias = MailAlias.objects.select_related('domain').filter(source_domain__user=request.user)
 	except:
 		mailalias = {}
 
